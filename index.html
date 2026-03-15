@@ -9,7 +9,18 @@
   <meta property="og:description" content="Hotel Comfort. Home Warmth. Boutique short-term rental in General Santos City, Philippines. Book direct for the best rate — no platform fees.">
   <meta property="og:image" content="https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1200">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cascadereservations.github.io/">
+  <meta property="og:site_name" content="Cascade Hideaway">
+  <meta property="og:locale" content="en_PH">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cascade Hideaway — Book Direct | General Santos City">
+  <meta name="twitter:description" content="Hotel-quality comfort, home warmth. Book direct for the best rate — no platform fees, no cleaning fee. ₱1,780/night all-in.">
+  <meta name="twitter:image" content="https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1200">
+  <link rel="canonical" href="https://cascadereservations.github.io/">
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="PH-SGS">
+  <meta name="geo.placename" content="General Santos City">
+  <meta name="keywords" content="Cascade Hideaway, boutique rental General Santos City, short term rental GenSan, book direct Airbnb GenSan, Bria Homes rental, Philippines staycation">
 
   <title>Cascade Hideaway — Book Direct | General Santos City</title>
 
@@ -18,9 +29,9 @@
   <link rel="preconnect" href="https://drive.google.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Hero LCP preload — property photo 1 (entrance); JS cycles through all five -->
+  <!-- Hero LCP preload — Sofa+Bed (IMG_10) — warm studio overview, opens the story -->
   <link rel="preload" as="image"
-        href="https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1920"
+        href="https://drive.google.com/thumbnail?id=1kIwtCJt7EUyNhkm_n3yuboZUcWhrl-ED&sz=w1920"
         fetchpriority="high">
 
   <style>
@@ -150,6 +161,11 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.55; transform: scale(0.85); }
     }
 
     /* ── 3. UTILITIES ── */
@@ -1237,6 +1253,58 @@
       letter-spacing: 0.02em; line-height: 1.4;
     }
 
+    /* ── Phone input with country code prefix ── */
+    .form-input-phone {
+      display: flex; align-items: stretch;
+      border: 1px solid rgb(247 242 232 / 0.18);
+      background: rgb(247 242 232 / 0.06);
+      transition: border-color var(--ch-dur-s) var(--ch-ease),
+                  background var(--ch-dur-s) var(--ch-ease);
+    }
+    .form-input-phone:focus-within {
+      border-color: rgb(201 150 58 / 0.65);
+      background: rgb(247 242 232 / 0.09);
+    }
+    .form-input-phone.is-invalid { border-color: var(--ch-error); }
+    .phone-code-select {
+      flex-shrink: 0;
+      padding: 0.85em 0.65em 0.85em 0.85em;
+      background: rgb(247 242 232 / 0.07);
+      border: none;
+      border-right: 1px solid rgb(247 242 232 / 0.14);
+      color: var(--ch-cream);
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer; outline: none;
+      appearance: none; -webkit-appearance: none;
+      /* custom arrow */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(247,242,232,0.35)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5em center;
+      padding-right: 1.6em;
+    }
+    .phone-code-select option { background: #1C1006; color: var(--ch-cream); }
+    .phone-number-input {
+      flex: 1; min-width: 0;
+      padding: 0.85em 1em;
+      background: transparent;
+      border: none;
+      color: var(--ch-cream);
+      font-family: var(--ch-font-body);
+      font-size: var(--step--1); font-weight: 300;
+      letter-spacing: 0.02em;
+      outline: none;
+    }
+    .phone-number-input::placeholder { color: rgb(247 242 232 / 0.25); }
+
+    /* Email note — inline tip next to label */
+    .form-label-note {
+      font-family: var(--ch-font-body); font-size: 9px; font-weight: 400;
+      letter-spacing: 0.10em; color: rgb(201 150 58 / 0.55);
+      text-transform: none; margin-inline-start: 0.4em;
+    }
+
     /* ── Rate estimate widget ── */
     .rate-estimate {
       padding: var(--space-s) var(--space-m);
@@ -1302,72 +1370,309 @@
     }
 
     /* ── Success dialog overlay ── */
+    /* ══════════════════════════════════════════════════════════════
+       SUCCESS DIALOG — stripped to 3 things: celebrate, next, reach
+       Navigation moved to persistent #stay-details section (below)
+    ══════════════════════════════════════════════════════════════ */
     .success-overlay {
       position: fixed; inset: 0; z-index: 2000;
-      background: rgb(28 16 6 / 0.82);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgb(28 16 6 / 0.72);
+      backdrop-filter: blur(10px) saturate(1.0);
+      -webkit-backdrop-filter: blur(10px) saturate(1.0);
       display: flex; align-items: center; justify-content: center;
       padding: var(--ch-gutter);
-      animation: heroRise 0.45s var(--ch-ease) both;
+      animation: heroRise 0.4s var(--ch-ease) both;
     }
+    /* Cream-paper dialog — lighter, "done" emotional register */
     .success-dialog {
-      background: var(--ch-mahogany);
-      border: 1px solid rgb(201 150 58 / 0.28);
+      background: #F7F2E8;
+      border: 1px solid rgb(28 16 6 / 0.10);
       box-shadow:
-        0 0 0 1px rgb(201 150 58 / 0.08) inset,
-        0 32px 80px rgb(0 0 0 / 0.55);
-      padding: var(--space-2xl) var(--space-xl);
-      max-width: 520px; width: 100%;
-      text-align: center;
-      display: flex; flex-direction: column; align-items: center; gap: var(--space-m);
-      position: relative;
-      animation: heroRise 0.5s var(--ch-ease) 0.1s both;
+        0 0 0 1px rgb(201 150 58 / 0.12) inset,
+        0 40px 80px rgb(0 0 0 / 0.40);
+      max-width: 420px; width: 100%;
+      display: flex; flex-direction: column; align-items: stretch;
+      position: relative; overflow: hidden;
+      animation: heroRise 0.5s var(--ch-ease) 0.08s both;
+    }
+    .success-dialog::before {
+      content: ''; position: absolute;
+      inset-block-start: 0; inset-inline: 0;
+      height: 3px; background: var(--ch-gold-gradient);
     }
     .success-close {
-      position: absolute; top: var(--space-m); right: var(--space-m);
+      position: absolute; top: var(--space-s); right: var(--space-s);
       background: transparent; border: none; cursor: pointer;
-      width: 32px; height: 32px;
+      width: 30px; height: 30px; z-index: 2;
       display: flex; align-items: center; justify-content: center;
-      color: rgb(247 242 232 / 0.35);
+      color: rgb(28 16 6 / 0.22);
       transition: color var(--ch-dur-s) var(--ch-ease);
     }
-    .success-close:hover { color: var(--ch-gold); }
+    .success-close:hover { color: rgb(28 16 6 / 0.55); }
     .success-close:focus-visible { outline: 2px solid var(--ch-gold); outline-offset: 2px; }
+
+    /* A: Celebration */
+    .success-header {
+      padding: var(--space-l) var(--space-l) var(--space-m);
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      background: var(--ch-mahogany);
+    }
     .booking-success-check {
-      width: 52px; height: 52px;
+      width: 48px; height: 48px;
       display: flex; align-items: center; justify-content: center;
-      background: rgb(201 150 58 / 0.12);
-      box-shadow: inset 0 0 0 1px rgb(201 150 58 / 0.3);
+      background: rgb(201 150 58 / 0.14);
+      box-shadow: inset 0 0 0 1px rgb(201 150 58 / 0.30);
       color: var(--ch-gold);
+      animation: successPop 0.55s var(--ch-ease) 0.3s both;
+    }
+    @keyframes successPop {
+      0%   { transform: scale(0.55); opacity: 0; }
+      65%  { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
     }
     .booking-success-title {
       font-family: var(--ch-font-display); font-size: var(--step-3);
-      font-weight: 300; color: var(--ch-cream); line-height: 1.15;
+      font-weight: 300; color: var(--ch-cream); line-height: 1.1;
+      letter-spacing: -0.01em;
     }
-    .booking-success-body {
-      font-family: var(--ch-font-display); font-size: var(--step-1);
-      font-weight: 300; font-style: italic;
-      color: rgb(247 242 232 / 0.65); line-height: 1.7;
-      max-width: 420px;
+    .success-subtitle {
+      font-family: var(--ch-font-display); font-size: var(--step-0);
+      font-style: italic; font-weight: 300;
+      color: rgb(201 150 58 / 0.75); letter-spacing: 0.01em;
     }
-    .booking-success-body a {
-      color: var(--ch-gold); text-decoration: none;
-      border-bottom: 1px solid rgb(201 150 58 / 0.35);
-      font-style: normal;
-      transition: border-color var(--ch-dur-s) var(--ch-ease);
+
+    /* B: Next steps — cream paper background */
+    .success-next-steps {
+      padding: var(--space-m) var(--space-l);
+      display: flex; flex-direction: column; gap: 0.85em;
+      background: #F7F2E8;
+      border-block-end: 1px solid rgb(28 16 6 / 0.09);
     }
-    .booking-success-body a:hover { border-color: var(--ch-gold); }
+    .success-steps-eyebrow {
+      font-family: var(--ch-font-body); font-size: 9px;
+      font-weight: 700; letter-spacing: 0.20em; text-transform: uppercase;
+      color: rgb(28 16 6 / 0.35); margin-bottom: 0.25em;
+    }
+    .success-step {
+      display: flex; align-items: flex-start; gap: 0.75em;
+    }
+    .success-step-num {
+      flex-shrink: 0; width: 19px; height: 19px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ch-font-body); font-size: 9px; font-weight: 700;
+      background: rgb(201 150 58 / 0.14); color: var(--ch-gold-muted);
+      border: 1px solid rgb(201 150 58 / 0.30); margin-top: 0.20em;
+    }
+    .success-step-text {
+      font-family: var(--ch-font-display); font-size: var(--step-0);
+      font-weight: 300; color: rgb(28 16 6 / 0.68); line-height: 1.48;
+    }
+    .success-step-text strong {
+      font-style: normal; font-weight: 500; color: var(--ch-mahogany);
+    }
+
+    /* C: Reach us — cream paper */
+    .success-reach {
+      padding: var(--space-s) var(--space-l);
+      display: flex; flex-direction: column; gap: var(--space-xs);
+      background: #F7F2E8;
+      border-block-end: 1px solid rgb(28 16 6 / 0.09);
+    }
+    .success-reach-label {
+      font-family: var(--ch-font-body); font-size: 9px;
+      font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgb(28 16 6 / 0.30); margin-bottom: 0.1em;
+    }
+    .success-reach-btns {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em;
+    }
+    .success-reach-btn {
+      display: flex; align-items: center; gap: 0.55em;
+      padding: 0.65em 0.85em;
+      border: 1px solid rgb(28 16 6 / 0.13);
+      background: #fff; text-decoration: none;
+      color: rgb(28 16 6 / 0.55);
+      transition: background var(--ch-dur-s) var(--ch-ease),
+                  border-color var(--ch-dur-s) var(--ch-ease),
+                  color var(--ch-dur-s) var(--ch-ease);
+    }
+    .success-reach-btn:hover {
+      background: rgb(28 16 6 / 0.04);
+      border-color: rgb(28 16 6 / 0.28); color: var(--ch-mahogany);
+    }
+    .success-reach-btn--messenger {
+      border-color: rgb(201 150 58 / 0.35);
+      color: var(--ch-gold-muted); background: rgb(201 150 58 / 0.06);
+    }
+    .success-reach-btn--messenger:hover {
+      background: rgb(201 150 58 / 0.12); border-color: var(--ch-gold);
+      color: var(--ch-mahogany);
+    }
+    .success-reach-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .success-reach-btn-text { display: flex; flex-direction: column; gap: 0.05em; }
+    .success-reach-btn-title {
+      font-family: var(--ch-font-body); font-size: var(--step--2);
+      font-weight: 600; letter-spacing: 0.06em;
+    }
+    .success-reach-btn-sub {
+      font-family: var(--ch-font-body); font-size: 9px;
+      font-weight: 400; opacity: 0.45;
+    }
+
+    /* D: Footer — cal + done — cream paper */
+    .success-footer {
+      padding: var(--space-s) var(--space-l) var(--space-m);
+      display: flex; flex-direction: column; align-items: center; gap: 0.55em;
+      background: #FBF7EE;
+      border-top: 1px solid rgb(28 16 6 / 0.07);
+    }
+    .success-cal-btn {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      font-family: var(--ch-font-body); font-size: var(--step--2);
+      font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;
+      padding: 0.6em 1.2em; background: transparent;
+      border: 1px solid rgb(201 150 58 / 0.35);
+      color: var(--ch-gold-muted);
+      text-decoration: none; cursor: pointer;
+      transition: background var(--ch-dur-s) var(--ch-ease),
+                  border-color var(--ch-dur-s) var(--ch-ease),
+                  color var(--ch-dur-s) var(--ch-ease);
+    }
+    .success-cal-btn:hover {
+      background: rgb(201 150 58 / 0.08); border-color: var(--ch-gold);
+      color: var(--ch-mahogany);
+    }
+    .success-cal-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .success-cal-note {
+      font-size: var(--step--2); color: rgb(28 16 6 / 0.30);
+      letter-spacing: 0.02em; font-style: italic; text-align: center;
+    }
     .success-done-btn {
-      margin-top: var(--space-s);
-      padding: 0.75em 2.2em;
+      margin-top: 0.3em; padding: 0.8em 2.6em;
       font-family: var(--ch-font-body); font-size: var(--step--2);
       font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--ch-gold); background: transparent;
-      border: 1px solid rgb(201 150 58 / 0.4); cursor: pointer;
-      transition: border-color var(--ch-dur-s) var(--ch-ease), color var(--ch-dur-s) var(--ch-ease);
+      color: var(--ch-mahogany); background: var(--ch-gold-gradient);
+      border: none; cursor: pointer;
+      transition: opacity var(--ch-dur-s) var(--ch-ease);
     }
-    .success-done-btn:hover { border-color: var(--ch-gold); color: var(--ch-cream); }
+    .success-done-btn:hover { opacity: 0.88; }
+    .success-done-btn:focus-visible { outline: 2px solid var(--ch-gold); outline-offset: 3px; }
+
+    /* host signature line */
+    .success-signature {
+      font-family: var(--ch-font-display); font-size: var(--step--1);
+      font-style: italic; font-weight: 300;
+      color: rgb(28 16 6 / 0.40); text-align: center;
+      margin-top: 0.15em;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       STAY DETAILS SECTION — revealed after booking confirmed
+       Progressive disclosure: destination/navigation shown only
+       when the guest is emotionally ready for next-step info
+    ══════════════════════════════════════════════════════════════ */
+    /* ── stay-details section — map right, address/shortcuts left ── */
+    .stay-details-section {
+      background: var(--ch-mahogany);
+      padding-block: 0;
+      overflow: hidden;
+    }
+    .stay-details-section[hidden] { display: none !important; }
+    .stay-details-section.is-revealed { animation: heroRise 0.7s var(--ch-ease) both; }
+    .stay-details-inner {
+      display: grid; grid-template-columns: 1fr; min-height: 480px;
+    }
+    @media (min-width: 768px) {
+      .stay-details-inner { grid-template-columns: 1fr 1fr; min-height: 520px; }
+    }
+    @media (min-width: 1024px) {
+      .stay-details-inner { grid-template-columns: 5fr 7fr; min-height: 560px; }
+    }
+    .stay-address-col {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; gap: var(--space-m);
+      background: var(--ch-mahogany);
+    }
+    @media (max-width: 767px) { .stay-address-col { padding: var(--space-l) var(--ch-gutter); } }
+    .stay-label {
+      font-family: var(--ch-font-body); font-size: var(--step--2);
+      font-weight: 600; letter-spacing: 0.20em; text-transform: uppercase;
+      color: var(--ch-gold);
+      display: flex; align-items: center; gap: 0.7em;
+    }
+    .stay-label::after {
+      content: ''; flex: 0 0 auto;
+      width: clamp(24px, 4vw, 40px); height: 1px;
+      background: var(--ch-gold-gradient); opacity: 0.45;
+    }
+    .stay-property-name {
+      font-family: var(--ch-font-display); font-size: var(--step-3);
+      font-weight: 300; color: var(--ch-cream); line-height: 1.08; letter-spacing: -0.01em;
+    }
+    .stay-property-name em {
+      font-style: italic;
+      color: color-mix(in oklch, var(--ch-cream) 75%, var(--ch-gold));
+    }
+    .stay-address {
+      font-family: var(--ch-font-body); font-size: var(--step--1);
+      font-weight: 400; color: rgb(247 242 232 / 0.55); line-height: 1.8;
+    }
+    .stay-address strong {
+      display: block; font-weight: 600; color: rgb(247 242 232 / 0.75); margin-bottom: 0.2em;
+    }
+    .stay-address-note {
+      font-family: var(--ch-font-body); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgb(201 150 58 / 0.50); margin-top: 0.5em;
+    }
+    .stay-checkin-pill {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.45em 0.9em;
+      background: rgb(201 150 58 / 0.10); border: 1px solid rgb(201 150 58 / 0.22);
+      font-family: var(--ch-font-body); font-size: var(--step--2);
+      font-weight: 500; letter-spacing: 0.06em; color: rgb(201 150 58 / 0.80);
+    }
+    .stay-checkin-pill svg { width: 11px; height: 11px; flex-shrink: 0; }
+    .stay-shortcuts {
+      display: flex; gap: 0.6em; flex-wrap: wrap; margin-top: 0.1em;
+    }
+    .stay-shortcut-btn {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      padding: 0.55em 1em;
+      border: 1px solid rgb(247 242 232 / 0.12);
+      background: rgb(247 242 232 / 0.03); color: rgb(247 242 232 / 0.55);
+      text-decoration: none; font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 500; letter-spacing: 0.06em;
+      transition: background var(--ch-dur-s) var(--ch-ease),
+                  border-color var(--ch-dur-s) var(--ch-ease),
+                  color var(--ch-dur-s) var(--ch-ease);
+    }
+    .stay-shortcut-btn:hover {
+      background: rgb(247 242 232 / 0.07); border-color: rgb(247 242 232 / 0.28);
+      color: var(--ch-cream);
+    }
+    .stay-shortcut-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .stay-shortcut-label { font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; font-size: 10px; }
+    .stay-map-col {
+      position: relative; display: flex; flex-direction: column; min-height: 300px;
+    }
+    @media (max-width: 767px) { .stay-map-col { min-height: 260px; } }
+    .stay-map-iframe {
+      width: 100%; flex: 1; border: none; display: block; min-height: 300px;
+      filter: brightness(0.92) saturate(0.85);
+    }
+    .stay-map-open {
+      display: flex; align-items: center; gap: 0.5em; justify-content: center;
+      padding: 0.7em var(--space-m);
+      background: var(--ch-mahogany); border-top: 1px solid rgb(201 150 58 / 0.18);
+      font-family: var(--ch-font-body); font-size: var(--step--2);
+      font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--ch-gold); text-decoration: none; flex-shrink: 0;
+      transition: background var(--ch-dur-s) var(--ch-ease), color var(--ch-dur-s) var(--ch-ease);
+    }
+    .stay-map-open:hover { background: rgb(201 150 58 / 0.08); color: var(--ch-gold-light); }
+    .stay-map-open svg { width: 12px; height: 12px; flex-shrink: 0; }
 
     /* ============================================================
        PART 6 — Contact + Footer
@@ -1652,14 +1957,18 @@
       font-family: var(--ch-font-display);
       font-size: var(--step-0);
       font-weight: 300;
-      color: var(--ch-gold);
+      color: rgb(247 242 232 / 0.55);
       margin-top: 0.15em;
     }
     .cal-sel-note {
-      font-size: var(--step--2);
-      color: rgb(247 242 232 / 0.38);
-      letter-spacing: 0.03em;
-      margin-top: 0.15em;
+      font-family: var(--ch-font-display);
+      font-size: var(--step--1);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ch-gold);
+      letter-spacing: 0.02em;
+      margin-top: 0.25em;
+      opacity: 0.85;
     }
     .cal-clear {
       font-size: var(--step--2);
@@ -1731,18 +2040,25 @@
     .payment-panel { display: flex; flex-direction: column; gap: var(--space-m); }
 
     /* Booking summary — full breakdown card */
+    /* ══════════════════════════════════════════════════════════════
+       PAYMENT BREAKDOWN — 3-zone layout
+       Zone A: Stay Cost (anchored base → discounted total)
+       Zone B: Send Now hero (reservation fee = dominant action)
+       Zone C: Later obligations (balance + deposit, subordinate)
+    ══════════════════════════════════════════════════════════════ */
     .pay-summary {
-      padding: var(--space-m) var(--space-m);
-      background: rgb(201 150 58 / 0.06);
-      border: 1px solid rgb(201 150 58 / 0.18);
-      border-inline-start: 3px solid var(--ch-gold);
-      display: flex; flex-direction: column; gap: var(--space-s);
+      display: flex; flex-direction: column; gap: 0;
+      margin-bottom: var(--space-m);
     }
+
+    /* ── Zone A header: dates + rate note ── */
     .pay-summary-header {
       display: flex; flex-wrap: wrap;
       align-items: baseline; gap: 0.3em var(--space-s);
-      padding-block-end: var(--space-xs);
-      border-block-end: 1px solid rgb(247 242 232 / 0.07);
+      padding: var(--space-s) var(--space-m);
+      background: rgb(201 150 58 / 0.04);
+      border: 1px solid rgb(201 150 58 / 0.14);
+      border-block-end: none;
     }
     .pay-summary-dates {
       font-family: var(--ch-font-display);
@@ -1755,124 +2071,229 @@
       white-space: nowrap;
     }
 
-    /* Breakdown rows */
-    .pay-summary-breakdown {
+    /* ── Zone A body: cost breakdown (anchor → saving → total) ── */
+    .pay-zone-cost {
+      padding: var(--space-s) var(--space-m);
+      background: rgb(201 150 58 / 0.04);
+      border: 1px solid rgb(201 150 58 / 0.14);
+      border-block-end: none;
       display: flex; flex-direction: column; gap: 0;
     }
-    .pay-breakdown-row {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: var(--space-s);
-      padding-block: 0.65rem;
-      border-block-end: 1px solid rgb(247 242 232 / 0.07);
+    .pay-cost-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: var(--space-s); padding-block: 0.4rem;
     }
-    .pay-breakdown-row:last-child { border-block-end: none; }
-
-    /* Total row — anchor price, deliberately quieter */
-    .pay-breakdown-row.pay-breakdown-total {
-      padding-block: 0.6rem 0.85rem;
-      margin-block-end: 0.15rem;
-      border-block-end: 1px solid rgb(247 242 232 / 0.12);
+    .pay-cost-row + .pay-cost-row {
+      border-block-start: 1px solid rgb(247 242 232 / 0.06);
     }
-    .pay-breakdown-total .pay-bd-label {
+    .pay-cost-label {
       font-family: var(--ch-font-body);
-      font-size: var(--step--1); font-weight: 500;
-      color: rgb(247 242 232 / 0.42); letter-spacing: 0.04em;
+      font-size: var(--step--1); font-weight: 400;
+      color: rgb(247 242 232 / 0.45); letter-spacing: 0.03em;
     }
-    .pay-breakdown-total .pay-bd-amount {
+    .pay-cost-value {
       font-family: var(--ch-font-display);
-      font-size: var(--step-1); font-weight: 300;
-      color: rgb(247 242 232 / 0.42); white-space: nowrap;
-      text-align: right;
+      font-size: var(--step-0); font-weight: 300;
+      color: rgb(247 242 232 / 0.45); white-space: nowrap;
     }
-
-    /* Reservation fee row — most important, gold + large */
-    .pay-breakdown-row.pay-breakdown-fee {
-      padding-block: 0.85rem;
-      background: rgb(201 150 58 / 0.05);
-      border-block-end: 1px solid rgb(201 150 58 / 0.12);
+    /* Strikethrough on the base amount — anchoring effect */
+    .pay-cost-value--base {
+      text-decoration: line-through;
+      text-decoration-color: rgb(247 242 232 / 0.22);
     }
-
-    /* Balance row — clear and readable, warm cream */
-    .pay-breakdown-row.pay-breakdown-balance {
-      padding-block: 0.7rem;
+    /* Savings row — positively framed, scales with intensity */
+    .pay-cost-row--saving {
+      padding-block: 0.45rem;
     }
-
-    /* Security deposit row — soft, reassuring */
-    .pay-breakdown-row.pay-breakdown-deposit {
-      padding-block: 0.7rem;
+    .pay-cost-row--saving .pay-cost-label {
+      display: flex; align-items: center; gap: 0.4em;
+      color: var(--ch-gold); font-weight: 500;
     }
-
-    .pay-bd-left { display: flex; flex-direction: column; gap: 0.25em; }
-
-    /* Label text */
-    .pay-bd-label {
+    .pay-cost-row--saving .pay-cost-value {
+      color: var(--ch-gold); font-weight: 300;
+    }
+    /* Saving intensity — scales font + glow with discount tier */
+    .pay-cost-row--saving[data-intensity="quiet"]  .pay-cost-value { color: rgb(201 150 58 / 0.60); font-size: var(--step-0); }
+    .pay-cost-row--saving[data-intensity="low"]    .pay-cost-value { color: rgb(201 150 58 / 0.78); font-size: var(--step-0); }
+    .pay-cost-row--saving[data-intensity="medium"] .pay-cost-value { color: var(--ch-gold);         font-size: var(--step-1); }
+    .pay-cost-row--saving[data-intensity="high"]   .pay-cost-value { color: var(--ch-gold-light);   font-size: var(--step-1); }
+    .pay-cost-row--saving[data-intensity="max"]    .pay-cost-value { color: var(--ch-gold-light);   font-size: var(--step-2); font-family: var(--ch-font-display); }
+    /* Saving nudge — small italic upsell under savings row */
+    .pay-saving-nudge {
+      font-family: var(--ch-font-display);
+      font-size: var(--step--2); font-style: italic;
+      color: rgb(201 150 58 / 0.55); letter-spacing: 0.02em;
+      padding-inline-start: 1.5em; margin-top: -0.2em;
+      margin-bottom: 0.3em;
+    }
+    /* Total row — heavier weight, gold divider above */
+    .pay-cost-row--total {
+      border-block-start: 1px solid rgb(201 150 58 / 0.25) !important;
+      padding-block: 0.7rem 0.3rem;
+      margin-block-start: 0.2rem;
+    }
+    .pay-cost-row--total .pay-cost-label {
       font-family: var(--ch-font-body);
-      font-size: var(--step--1); font-weight: 400;
-      color: rgb(247 242 232 / 0.70); line-height: 1.3;
-    }
-    .pay-breakdown-fee .pay-bd-label {
-      font-size: var(--step-0); font-weight: 500;
-      color: var(--ch-cream);
-    }
-    .pay-breakdown-balance .pay-bd-label {
-      font-size: var(--step-0); font-weight: 400;
-      color: rgb(247 242 232 / 0.85);
-    }
-    .pay-breakdown-deposit .pay-bd-label {
-      font-size: var(--step--1); font-weight: 400;
+      font-size: var(--step--1); font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
       color: rgb(247 242 232 / 0.60);
     }
-
-    /* Status tags under labels */
-    .pay-bd-tag {
-      display: inline-block;
+    .pay-cost-row--total .pay-cost-value {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-2); font-weight: 300;
+      color: var(--ch-cream);
+    }
+    /* Cleaning fee confirmation */
+    .pay-allincl-note {
       font-family: var(--ch-font-body);
-      font-size: 9.5px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    /* Gold — pay now */
-    .pay-bd-tag-now {
-      color: var(--ch-gold);
-    }
-    /* Warm white — pay later, low pressure */
-    .pay-bd-tag-later {
-      color: rgb(247 220 160 / 0.60);
-    }
-    /* Sage green — refundable, reassuring */
-    .pay-bd-tag-refund {
-      color: rgb(160 210 170 / 0.75);
+      font-size: var(--step--2); font-weight: 500;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgb(160 210 170 / 0.65);
+      padding-block: 0.5rem 0.6rem;
+      display: flex; align-items: center; gap: 0.4em;
     }
 
-    /* Amount values */
-    .pay-bd-amount {
-      font-family: var(--ch-font-display);
-      font-size: var(--step-2); font-weight: 300;
-      color: rgb(247 242 232 / 0.85); white-space: nowrap;
-      text-align: right; letter-spacing: 0.02em;
+    /* ── Zone B: Send Now hero card ── */
+    .pay-zone-action {
+      padding: var(--space-m) var(--space-m) var(--space-s);
+      background: rgb(201 150 58 / 0.10);
+      border: 1px solid rgb(201 150 58 / 0.35);
+      border-block-end: none;
+      position: relative;
+      box-shadow: 0 0 28px rgb(201 150 58 / 0.08), 0 2px 0 0 rgb(201 150 58 / 0.15) inset;
     }
-    /* Fee amount — gold, largest */
-    .pay-bd-highlight {
-      font-family: var(--ch-font-display);
-      font-size: var(--step-3); font-weight: 300;
-      color: var(--ch-gold); white-space: nowrap;
-      text-align: right; letter-spacing: 0.01em;
+    .pay-zone-action::before {
+      content: '';
+      position: absolute; inset-block-start: 0; inset-inline: 0;
+      height: 2px; background: var(--ch-gold-gradient);
     }
-    /* Balance amount — clear cream */
-    .pay-bd-amount-balance {
-      font-family: var(--ch-font-display);
-      font-size: var(--step-2); font-weight: 300;
-      color: var(--ch-cream); white-space: nowrap;
-      text-align: right; letter-spacing: 0.02em;
+
+    /* OTA savings chip — anchoring vs. platform fees */
+    .pay-ota-saving-chip {
+      display: inline-flex; align-items: center; gap: 0.4em;
+      margin-bottom: var(--space-s);
+      padding: 0.3em 0.65em;
+      background: rgb(50 130 70 / 0.14);
+      border: 1px solid rgb(80 160 90 / 0.28);
+      font-family: var(--ch-font-body);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: rgb(110 190 125);
     }
-    /* Deposit amount — softer */
-    .pay-bd-amount-deposit {
+    .pay-ota-saving-chip svg { flex-shrink: 0; width: 9px; height: 9px; }
+    .pay-action-eyebrow {
+      font-family: var(--ch-font-body);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.20em; text-transform: uppercase;
+      color: var(--ch-gold); margin-bottom: 0.4em;
+      display: flex; align-items: center; gap: 0.5em;
+    }
+    .pay-action-eyebrow::before {
+      content: '✦'; font-size: 7px; opacity: 0.85;
+    }
+    .pay-action-hero {
+      display: flex; align-items: baseline;
+      justify-content: space-between; gap: var(--space-s);
+      flex-wrap: wrap;
+    }
+    .pay-action-label {
       font-family: var(--ch-font-display);
       font-size: var(--step-1); font-weight: 300;
-      color: rgb(247 242 232 / 0.55); white-space: nowrap;
-      text-align: right; letter-spacing: 0.02em;
+      color: var(--ch-cream); line-height: 1.2;
+    }
+    .pay-action-label small {
+      display: block;
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 500;
+      letter-spacing: 0.06em; color: rgb(247 242 232 / 0.50);
+      margin-top: 0.15em;
+    }
+    .pay-action-amount {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-4); font-weight: 300;
+      color: var(--ch-gold); white-space: nowrap;
+      letter-spacing: -0.01em; line-height: 1;
+    }
+    .pay-action-amount .pay-amount-currency {
+      font-size: var(--step-1); vertical-align: super;
+      line-height: 0; font-weight: 400; margin-inline-end: 0.05em;
+    }
+    .pay-action-confirm {
+      font-family: var(--ch-font-display);
+      font-size: var(--step--1); font-style: italic;
+      color: rgb(247 242 232 / 0.40); margin-top: 0.6em;
+      padding-block-start: 0.55em;
+      border-block-start: 1px solid rgb(201 150 58 / 0.15);
     }
 
-    /* Deposit callout */
+    /* ── Zone C: Later obligations — compact, subordinate ── */
+    .pay-zone-later {
+      padding: var(--space-s) var(--space-m);
+      background: rgb(28 16 6 / 0.25);
+      border: 1px solid rgb(201 150 58 / 0.14);
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .pay-later-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-s); padding-block: 0.5rem;
+    }
+    .pay-later-row + .pay-later-together + .pay-later-row {
+      border-block-start: none;
+    }
+    .pay-later-left { display: flex; flex-direction: column; gap: 0.18em; }
+    .pay-later-label {
+      font-family: var(--ch-font-body);
+      font-size: var(--step--1); font-weight: 400;
+      color: rgb(247 242 232 / 0.65);
+    }
+    .pay-later-tag {
+      font-family: var(--ch-font-body);
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .pay-later-tag--when { color: rgb(247 220 160 / 0.55); }
+    .pay-later-tag--refund { color: rgb(160 210 170 / 0.65); }
+    .pay-later-amount {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-1); font-weight: 300;
+      color: rgb(247 242 232 / 0.65); white-space: nowrap;
+    }
+    .pay-later-amount--deposit {
+      font-size: var(--step-0);
+      color: rgb(247 242 232 / 0.40);
+    }
+    /* Collected-together bridge */
+    .pay-later-together {
+      display: flex; align-items: center; gap: 0.6em;
+      padding-block: 0.2em;
+      margin-inline: -0.1em;
+    }
+    .pay-later-together-line {
+      flex: 1; height: 1px;
+      background: rgb(247 220 160 / 0.18);
+    }
+    .pay-later-together-label {
+      font-family: var(--ch-font-body);
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgb(247 220 160 / 0.35);
+      white-space: nowrap;
+    }
+
+    /* ── Zone D: trust seal ── */
+    .pay-zone-trust {
+      padding: 0.65rem var(--space-m);
+      background: transparent;
+      border: 1px solid rgb(201 150 58 / 0.10);
+      display: flex; align-items: center; gap: 0.55em;
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgb(247 242 232 / 0.28);
+    }
+    .pay-zone-trust svg { flex-shrink: 0; color: rgb(160 210 170 / 0.55); }
+
+    /* ── Keep old deposit note styling for text blocks below tabs ── */
     .pay-deposit-note {
       font-size: var(--step--1); font-weight: 400;
       color: rgb(247 242 232 / 0.50); line-height: 1.65;
@@ -1958,6 +2379,90 @@
     }
     .pay-tab:hover { color: rgb(247 242 232 / 0.65); }
     .pay-tab.is-active { color: var(--ch-gold); border-bottom-color: var(--ch-gold); }
+
+    /* Bank Transfer recommended badge on tab */
+    .pay-tab-badge {
+      display: inline-block;
+      margin-inline-start: 0.45em;
+      font-size: 0.52rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ch-mahogany);
+      background: var(--ch-gold-gradient);
+      padding: 0.12em 0.4em;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    /* GCash delay warning note */
+    .pay-gcash-delay-note {
+      display: flex; align-items: flex-start; gap: 0.75em;
+      padding: 0.85em 1em;
+      background: rgb(184 88 64 / 0.10);
+      border: 1px solid rgb(184 88 64 / 0.28);
+      border-left: 3px solid #B85840;
+    }
+    .pay-gcash-delay-icon {
+      flex-shrink: 0; color: #B85840;
+      width: 1.1em; height: 1.1em; margin-top: 0.1em;
+    }
+    .pay-gcash-delay-icon svg { width: 100%; height: 100%; }
+    .pay-gcash-delay-body {
+      flex: 1; min-width: 0;
+    }
+    .pay-gcash-delay-heading {
+      display: block;
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgb(184 88 64 / 0.90);
+      margin-bottom: 0.3em;
+    }
+    .pay-gcash-delay-body p {
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 400;
+      color: rgb(247 242 232 / 0.50);
+      line-height: 1.58; margin: 0;
+    }
+    /* Inline link to switch tab */
+    .pay-switch-to-bank-btn {
+      background: none; border: none; padding: 0; cursor: pointer;
+      font-family: inherit; font-size: inherit; font-weight: 600;
+      color: var(--ch-gold); text-decoration: underline;
+      text-decoration-color: rgb(201 150 58 / 0.40);
+      text-underline-offset: 2px;
+    }
+    .pay-switch-to-bank-btn:hover { color: var(--ch-gold-light); }
+
+    /* Bank Transfer instant confirm note */
+    .pay-bank-instant-note {
+      display: flex; align-items: center; gap: 0.65em;
+      padding: 0.75em 1em;
+      background: rgb(50 120 70 / 0.12);
+      border: 1px solid rgb(80 160 90 / 0.25);
+      border-left: 3px solid rgb(80 160 90 / 0.70);
+    }
+    .pay-bank-instant-icon {
+      flex-shrink: 0;
+      width: 1em; height: 1em; color: rgb(100 180 110);
+    }
+    .pay-bank-instant-icon svg { width: 100%; height: 100%; }
+    .pay-bank-instant-body {
+      flex: 1; min-width: 0;
+    }
+    .pay-bank-instant-heading {
+      display: block;
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgb(100 200 110 / 0.90);
+      margin-bottom: 0.15em;
+    }
+    .pay-bank-instant-body p {
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2);
+      color: rgb(247 242 232 / 0.45);
+      line-height: 1.55; margin: 0;
+    }
 
     /* Tab pane */
     .pay-pane { display: none; flex-direction: column; gap: var(--space-m); padding-top: var(--space-m); }
@@ -2076,6 +2581,24 @@
       border-color: rgb(201 150 58 / 0.40);
       background: rgb(201 150 58 / 0.05);
     }
+    /* Reading state — shown while FileReader processes the file */
+    .receipt-dropzone[data-reading] {
+      border-color: rgb(201 150 58 / 0.55);
+      background: rgb(201 150 58 / 0.08);
+      pointer-events: none;
+      animation: receiptPulse 1.1s ease-in-out infinite;
+    }
+    .receipt-dropzone[data-reading] .receipt-drop-text::after {
+      content: ' — processing\2026';
+      color: var(--ch-gold);
+    }
+    @keyframes receiptPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.65; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .receipt-dropzone[data-reading] { animation: none; }
+    }
     .receipt-dropzone input[type="file"] {
       position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
     }
@@ -2139,18 +2662,19 @@
     .location-inner {
       display: grid;
       grid-template-columns: 1fr;
-      min-height: 420px;
+      align-items: stretch;
+      min-height: 500px;
     }
     @media (min-width: 768px) {
       .location-inner {
         grid-template-columns: 1fr 360px;
-        min-height: 480px;
+        min-height: 560px;
       }
     }
     @media (min-width: 1024px) {
       .location-inner {
         grid-template-columns: 1fr 400px;
-        min-height: 520px;
+        min-height: 600px;
       }
     }
 
@@ -2159,12 +2683,13 @@
        EXPLORE PANEL — photo cards + quick grids
     ══════════════════════════════════════════ */
     .location-explore {
-      background: var(--ch-cream);
+      background: var(--ch-mahogany);
       padding: 0;
       display: flex; flex-direction: column;
       gap: 0;
       position: relative;
       overflow: hidden;
+      align-self: stretch;
     }
     @media (max-width: 767px) {
       .location-explore { padding: 0; gap: 0; }
@@ -2209,11 +2734,18 @@
     .gallery-carousel {
       position: relative;
       overflow: hidden;
-      flex: 1;           /* fill all available height in location-explore */
-      min-height: 280px;
+      /* Stretch to fill the full explore panel — no gap possible */
+      flex: 1 1 0;
+      min-height: 0;
+      align-self: stretch;
     }
+    /* Mobile: aspect-ratio drives height so images are always proportional */
     @media (max-width: 767px) {
-      .gallery-carousel { min-height: 260px; }
+      .gallery-carousel {
+        flex: none;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+      }
     }
 
     .gallery-track {
@@ -2227,13 +2759,12 @@
       flex: 0 0 100%;
       scroll-snap-align: start;
       position: relative;
-      aspect-ratio: unset;   /* fill container height instead of ratio */
       height: 100%;
       background: var(--ch-mahogany);
       overflow: hidden;
     }
-    /* taller on mobile where panel is narrow */
-    @media (max-width: 479px) { .gallery-slide { aspect-ratio: unset; } }
+    /* On mobile the carousel drives height via aspect-ratio; slides fill it */
+    @media (max-width: 479px) { .gallery-slide { height: 100%; } }
 
     .gallery-slide img {
       width: 100%; height: 100%;
@@ -2445,65 +2976,6 @@
     .loc-cta-btn.is-messenger { border-color: rgb(0 153 255 / 0.15); }
     .loc-cta-btn.is-messenger:hover { border-color: rgb(0 153 255 / 0.30); background: rgb(0 153 255 / 0.05); }
     /* Get Directions button in success dialog */
-    .success-directions-btn {
-      display: inline-flex; align-items: center; gap: 0.55em;
-      font-family: var(--ch-font-body);
-      font-size: var(--step--2); font-weight: 600;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      padding: 0.7em 1.3em;
-      background: transparent;
-      border: 1px solid rgb(247 242 232 / 0.18);
-      color: rgb(247 242 232 / 0.65);
-      text-decoration: none; cursor: pointer;
-      transition: background var(--ch-dur-s) var(--ch-ease),
-                  border-color var(--ch-dur-s) var(--ch-ease),
-                  color var(--ch-dur-s) var(--ch-ease);
-    }
-    .success-directions-btn:hover {
-      background: rgb(247 242 232 / 0.05);
-      border-color: rgb(247 242 232 / 0.35);
-      color: var(--ch-cream);
-    }
-    .success-directions-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-    .success-address-reveal {
-      font-family: var(--ch-font-display);
-      font-size: var(--step-0); font-weight: 300; font-style: italic;
-      color: rgb(247 242 232 / 0.60); line-height: 1.6;
-      border-block-start: 1px solid rgb(247 242 232 / 0.08);
-      padding-block-start: var(--space-s);
-      width: 100%; text-align: center;
-    }
-    .success-address-reveal strong {
-      display: block; font-style: normal; font-weight: 500;
-      color: var(--ch-cream); font-size: var(--step--1);
-      font-family: var(--ch-font-body); letter-spacing: 0.04em;
-      margin-bottom: 0.3em; opacity: 0.65;
-    }
-    /* Calendar reminder button in success dialog */
-    .success-cal-btn {
-      display: inline-flex; align-items: center; gap: 0.55em;
-      font-family: var(--ch-font-body);
-      font-size: var(--step--2); font-weight: 600;
-      letter-spacing: 0.10em; text-transform: uppercase;
-      padding: 0.7em 1.3em;
-      background: transparent;
-      border: 1px solid rgb(201 150 58 / 0.35);
-      color: var(--ch-gold);
-      text-decoration: none; cursor: pointer;
-      transition: background var(--ch-dur-s) var(--ch-ease),
-                  border-color var(--ch-dur-s) var(--ch-ease);
-      margin-top: var(--space-xs);
-    }
-    .success-cal-btn:hover {
-      background: rgb(201 150 58 / 0.09);
-      border-color: rgb(201 150 58 / 0.60);
-    }
-    .success-cal-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-    .success-cal-note {
-      font-size: var(--step--2); color: rgb(28 16 6 / 0.42);
-      letter-spacing: 0.03em; font-style: italic;
-      margin-top: 0.4em;
-    }
     /* ── Mobile sticky CTA bar — appears after hero scroll ── */
     .sticky-cta-bar {
       position: fixed;
@@ -2558,14 +3030,132 @@
       .site-footer { padding-bottom: calc(var(--space-m) + 64px); }
     }
 
-    /* ── WhatsApp CTA button ── */
-    .loc-cta-btn.is-whatsapp:hover {
-      border-color: rgb(37 211 102 / 0.30);
-      background: rgb(37 211 102 / 0.05);
+
+
+    /* ── Tiered pricing table ── */
+    .tier-table {
+      width: 100%;
+      border: 1px solid rgb(201 150 58 / 0.18);
+      margin-bottom: var(--space-s);
     }
-    .loc-cta-btn.is-whatsapp svg { color: #25D366; opacity: 0.85; }
-    .loc-cta-btn.is-whatsapp:hover svg { opacity: 1; }
+    .tier-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      align-items: center;
+      padding: 0.6em 0.9em;
+      border-bottom: 1px solid rgb(247 242 232 / 0.06);
+      gap: 0.75em;
+    }
+    .tier-row:last-child { border-bottom: none; }
+    .tier-row--header {
+      background: rgb(201 150 58 / 0.08);
+      padding: 0.4em 0.9em;
+    }
+    .tier-row--header span {
+      font-family: var(--ch-font-body);
+      font-size: 0.56rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgb(201 150 58 / 0.50);
+    }
+    .tier-row--header span:not(:first-child) { text-align: right; }
+    .tier-row--popular { background: rgb(201 150 58 / 0.06); }
+    .tier-row--best {
+      background: rgb(201 150 58 / 0.11);
+      border: 1px solid rgb(201 150 58 / 0.25);
+    }
+    .tier-cell-stay { display: flex; flex-direction: column; gap: 0.18em; }
+    .tier-nights {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-0); font-weight: 300;
+      color: var(--ch-cream);
+    }
+    .tier-tag {
+      font-family: var(--ch-font-body);
+      font-size: 0.54rem; font-weight: 500; letter-spacing: 0.07em;
+      color: rgb(201 150 58 / 0.60);
+    }
+    .tier-pop-label, .tier-best-label {
+      font-family: var(--ch-font-body);
+      font-size: 0.50rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.12em 0.45em; width: fit-content;
+    }
+    .tier-pop-label { color: var(--ch-gold); background: rgb(201 150 58 / 0.14); }
+    .tier-best-label { color: var(--ch-mahogany); background: var(--ch-gold-gradient); }
+    .tier-cell-was { text-align: right; }
+    .tier-was {
+      font-family: var(--ch-font-body);
+      font-size: 0.72rem; font-weight: 400;
+      color: rgb(247 242 232 / 0.28);
+      text-decoration: line-through;
+      text-decoration-color: rgb(247 242 232 / 0.25);
+      white-space: nowrap;
+    }
+    .tier-cell-rate { text-align: right; }
+    .tier-price {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-1); font-weight: 300;
+      color: var(--ch-cream); white-space: nowrap;
+    }
+    .tier-cell-save { text-align: right; }
+    .tier-badge {
+      display: inline-block;
+      font-family: var(--ch-font-body);
+      font-size: 0.56rem; font-weight: 600; letter-spacing: 0.10em;
+      padding: 0.2em 0.5em;
+      background: rgb(247 242 232 / 0.07);
+      color: rgb(247 242 232 / 0.48); white-space: nowrap;
+    }
+    .tier-badge--gold { background: rgb(201 150 58 / 0.15); color: var(--ch-gold); }
+    .tier-badge--cream { background: var(--ch-gold-gradient); color: var(--ch-mahogany); font-weight: 700; }
+    @media (max-width: 480px) {
+      .tier-row { grid-template-columns: 1fr auto auto; }
+      .tier-cell-was { display: none; }
+      .tier-row--header span.tier-hdr-was { display: none; }
+    }
+
   </style>
+
+  <!-- Schema.org LodgingBusiness structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Cascade Hideaway",
+    "alternateName": "Cascade Reservations",
+    "description": "Boutique short-term rental in General Santos City, Philippines. Hotel-quality linens, fully equipped kitchen, high-speed Wi-Fi, air conditioning, smart TV. Book direct for the best rate.",
+    "url": "https://cascadereservations.github.io/",
+    "image": "https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1200",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Block 47, Lot 39, Bria Homes, Conel Road",
+      "addressLocality": "General Santos City",
+      "addressRegion": "South Cotabato",
+      "postalCode": "9500",
+      "addressCountry": "PH"
+    },
+    "telephone": "+639618056979",
+    "email": "cascadereservations@gmail.com",
+    "priceRange": "From PHP 1460 per night",
+    "checkinTime": "14:00",
+    "checkoutTime": "12:00",
+    "amenityFeature": [
+      {"@type":"LocationFeatureSpecification","name":"Hotel-Grade Linens","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Fully Equipped Kitchen","value":true},
+      {"@type":"LocationFeatureSpecification","name":"High-Speed Wi-Fi","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Air Conditioning","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Smart TV with Netflix","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Free Parking","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Self Check-In","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Laundry Facilities","value":true}
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.97",
+      "reviewCount": "31"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -2599,7 +3189,7 @@
       <!-- No-JS fallback — JS builds Drive-photo slides and replaces this -->
       <div class="hero-slide is-active" aria-hidden="true">
         <img
-          src="https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1920"
+          src="https://drive.google.com/thumbnail?id=1kIwtCJt7EUyNhkm_n3yuboZUcWhrl-ED&sz=w1920"
           alt=""
           width="1920" height="1080"
           loading="eager" fetchpriority="high" decoding="auto"
@@ -2678,26 +3268,30 @@
           </div>
 
           <h2 class="section-heading ch-reveal" id="about-heading">
-            Hotel Comfort.
-            <span class="heading-em">Home Warmth.</span>
+            A Calm Space,
+            <span class="heading-em">Thoughtfully Prepared.</span>
           </h2>
 
           <span class="gold-rule-sm ch-reveal" style="margin-block: var(--space-m);" aria-hidden="true"></span>
 
           <p class="about-body is-lead ch-reveal">
-            All the polish of a hotel. All the warmth of a home.
+            A calm, beautifully prepared space designed to make every stay feel effortless.
           </p>
 
           <p class="about-body ch-reveal">
-            Cascade Hideaway was designed around a single question: what would it feel
-            like if every detail of a stay away from home was exactly right? The answer
-            is here — in crisp hotel-grade linens, a spotless kitchen stocked for mornings,
-            and a host who genuinely cares how your stay goes.
+            At Cascade Hideaway, you'll find the thoughtful details of a hotel — crisp linens,
+            spotless spaces, and reliable comforts — paired with the warmth and ease of a home.
           </p>
 
           <p class="about-body ch-reveal">
-            This is General Santos City as it should be experienced: quietly, comfortably,
-            without compromise.
+            Start slow mornings in a fully equipped kitchen, rest in hotel-quality bedding,
+            and enjoy the quiet of a secure residential community just minutes from GenSan's
+            malls, caf&#233;s, and restaurants.
+          </p>
+
+          <p class="about-body ch-reveal">
+            Clean, comfortable, and carefully prepared — so you can simply arrive, relax,
+            and feel at home.
           </p>
 
           <div class="about-signature ch-reveal">
@@ -2769,7 +3363,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Hotel-Grade Linens</p>
-            <p class="amenity-desc">Fresh, crisp bedding and towels — laundered to hospitality standards before every stay</p>
+            <p class="amenity-desc">Crisp, freshly laundered bedding and plush towels — every set pressed and prepared the way a good hotel would, before every single stay</p>
           </div>
         </div>
 
@@ -2783,7 +3377,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Fully Equipped Kitchen</p>
-            <p class="amenity-desc">Cookware, utensils, rice cooker, and all essentials — cook in or order out</p>
+            <p class="amenity-desc">Rice cooker, cookware, utensils, cups, and everything you need for a proper home-cooked morning — or simply somewhere to make coffee and feel settled</p>
           </div>
         </div>
 
@@ -2798,7 +3392,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">High-Speed Wi-Fi</p>
-            <p class="amenity-desc">Reliable fiber broadband — fast enough to work, stream, or video call all day</p>
+            <p class="amenity-desc">Fiber broadband that holds steady whether you're video calling, streaming, or working remotely — no buffering, no excuses</p>
           </div>
         </div>
 
@@ -2811,7 +3405,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Air Conditioning</p>
-            <p class="amenity-desc">Strong split-type aircon — cool down fast from GenSan heat the moment you step in</p>
+            <p class="amenity-desc">A powerful split-type aircon that cools the space quickly — step in from the GenSan heat and feel the difference in minutes</p>
           </div>
         </div>
 
@@ -2824,7 +3418,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Smart TV &amp; Streaming</p>
-            <p class="amenity-desc">Large smart TV with Netflix — curl up on the sofa and stream without leaving</p>
+            <p class="amenity-desc">A large smart TV with Netflix — curl up on the sofa, put something on, and give yourself full permission to do absolutely nothing</p>
           </div>
         </div>
 
@@ -2838,7 +3432,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Hot &amp; Cold Shower</p>
-            <p class="amenity-desc">Instant hot water — arrive early or late, a hot shower is always waiting</p>
+            <p class="amenity-desc">Instant hot water, always ready — whether you're freshening up after a long drive or unwinding at the end of the day</p>
           </div>
         </div>
 
@@ -2852,7 +3446,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Free Parking</p>
-            <p class="amenity-desc">Free roadside parking right near the unit — one of the few places in the area with no parking fees</p>
+            <p class="amenity-desc">Free roadside parking right at the unit — no fees, no hunting for a spot. Just park and walk straight in.</p>
           </div>
         </div>
 
@@ -2865,8 +3459,8 @@
             </svg>
           </div>
           <div class="amenity-body">
-            <p class="amenity-name">Starter Essentials</p>
-            <p class="amenity-desc">Shampoo, soap, tissue, and dishwashing supplies — stocked so you don't shop on arrival</p>
+            <p class="amenity-name">Welcome Essentials</p>
+            <p class="amenity-desc">Shampoo, conditioner, soap, tissue, and dishwashing supplies — stocked and ready so your first moments are about settling in, not running to a store</p>
           </div>
         </div>
 
@@ -2880,7 +3474,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Laundry-Ready</p>
-            <p class="amenity-desc">Laundry facilities on-property — ideal for extended stays or business trips needing a refresh</p>
+            <p class="amenity-desc">On-property laundry access — a quiet convenience that makes extended stays feel genuinely comfortable, not just manageable</p>
           </div>
         </div>
 
@@ -2894,7 +3488,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Smart Lock · Self Check-In</p>
-            <p class="amenity-desc">Arrive on your schedule — check yourself in with the smartlock, no key handoff needed</p>
+            <p class="amenity-desc">A smart lock means you arrive on your own time — no waiting, no coordinating. Your code is ready when you are.</p>
           </div>
         </div>
 
@@ -2907,7 +3501,7 @@
           </div>
           <div class="amenity-body">
             <p class="amenity-name">Dedicated Workspace</p>
-            <p class="amenity-desc">A proper desk and chair — work remotely without hunching over a coffee table</p>
+            <p class="amenity-desc">A proper desk and chair for those who need to work — because a laptop on a bed is no way to spend a productive day</p>
           </div>
         </div>
 
@@ -2940,20 +3534,25 @@
           </div>
 
           <h2 class="section-heading ch-reveal" id="rates-heading">
-            Transparent Pricing.
-            <span class="heading-em">No Surprises.</span>
+            Stay Longer,
+            <span class="heading-em">Save More.</span>
           </h2>
 
           <span class="gold-rule-sm ch-reveal" style="margin-block: var(--space-m);" aria-hidden="true"></span>
 
-          <div class="rate-cards ch-reveal">
+          <p class="ch-reveal" style="font-family:var(--ch-font-display); font-size:var(--step-0); font-weight:300; color:rgb(247 242 232 / 0.72); line-height:1.7; margin-bottom:var(--space-m);">
+            Book direct and save up to <strong style="color:var(--ch-gold); font-weight:400;">18%</strong> &#x2014; no platform fees, no markups, and cleaning always included. The longer you stay, the more you save.
+          </p>
+
+          <!-- Base rate anchor cards -->
+          <div class="rate-cards ch-reveal" style="margin-bottom:var(--space-s);">
 
             <div class="rate-card">
-              <p class="rate-card-label">Starting from</p>
+              <p class="rate-card-label">Base Rate</p>
               <p class="rate-card-price">
-                <span class="currency" aria-hidden="true">₱</span>1,780
+                <span class="currency" aria-hidden="true">&#x20B1;</span>1,780
               </p>
-              <p class="rate-card-sub">per night · all-in, no hidden fees</p>
+              <p class="rate-card-sub">per night &#xB7; all-in &#xB7; no cleaning fee</p>
             </div>
 
             <a
@@ -2967,20 +3566,24 @@
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                 <circle cx="12" cy="9" r="2.5"/>
               </svg>
-              <p class="rate-card-link-label">Check Live Rates &amp; Availability</p>
-              <p class="rate-card-link-sub">on Airbnb ↗</p>
+              <p class="rate-card-link-label">Check Live Availability</p>
+              <p class="rate-card-link-sub">on Airbnb &#x2197;</p>
             </a>
 
           </div>
 
+          <!-- Discount note — shown below cards -->
+          <p class="ch-reveal rate-discount-note" style="font-family:var(--ch-font-display); font-size:var(--step-0); font-style:italic; font-weight:300; color:var(--ch-gold); letter-spacing:0.02em; margin-bottom:var(--space-m);">
+            Direct booking discounts applied automatically at checkout &#x2014; the longer you stay, the more you save.
+          </p>
+
+          <!-- 5-night sweet spot callout -->
           <div class="rate-discount ch-reveal">
             <svg class="rate-discount-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
             </svg>
             <p class="rate-discount-text">
-              <strong>Longer stays deserve a gentler rate.</strong> Guests who linger five nights or more
-              are rewarded with a private arrangement — simply mention it when you write to us and we will
-              personally see to the best price for your visit.
+              <strong>The 5-night sweet spot.</strong> At 5 nights you save &#x20B1;1,070 total <em>plus</em> a complimentary mid-stay room refresh &#x2014; the biggest value jump in the ladder. Guests who discover this rarely book any other way.
             </p>
           </div>
 
@@ -3001,13 +3604,17 @@
             </li>
             <li class="policy-row ch-reveal">
               <span class="policy-key">Minimum Stay</span>
-              <span class="policy-val">2 nights</span>
+              <span class="policy-val">1 night</span>
+            </li>
+            <li class="policy-row ch-reveal">
+              <span class="policy-key">Cleaning Fee</span>
+              <span class="policy-val" style="color:rgb(201 150 58 / 0.80);">Always included &#x2014; &#x20B1;0 extra</span>
             </li>
             <li class="policy-row ch-reveal">
               <span class="policy-key">Cancellation</span>
               <span class="policy-val" style="line-height:1.55;">
                 Free if cancelled 7+ days out<br>
-                <span style="color:rgb(247 242 232 / 0.45); font-size:var(--step--1);">50% refund within 3–6 days &middot; non-refundable under 3 days</span>
+                <span style="color:rgb(247 242 232 / 0.45); font-size:var(--step--1);">50% refund within 3&#x2013;6 days &middot; non-refundable under 3 days</span>
               </span>
             </li>
             <li class="policy-row ch-reveal">
@@ -3028,13 +3635,13 @@
 
       <div class="rates-cta-row ch-reveal">
         <a href="#booking" class="btn btn-gold">Check Availability</a>
-        <span class="rates-cta-note">Your best rate always lives here — no platform, no markup</span>
+        <span class="rates-cta-note">Your best rate always lives here &#x2014; no platform, no markup</span>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================================
+    <!-- ============================================================
        GALLERY
   ============================================================ -->
   <section class="gallery-section" id="gallery" aria-labelledby="gallery-heading">
@@ -3098,11 +3705,11 @@
 
         <div class="gallery-cell gallery-cell--5 ch-reveal"
              role="listitem" tabindex="0" data-index="4"
-             aria-label="Open photo: Dedicated workspace desk">
-          <!-- IMG_01 — Adress Signage.jpg — property signage Blk 47 Lot 39 -->
+             aria-label="Open photo: Bar counter and bedroom alcove">
+          <!-- IMG_03 — Bar+Bed.jpg — bar counter and bedroom alcove, atmospheric interior -->
           <img
-            src="https://drive.google.com/thumbnail?id=1B-ZnEfqCuH7a0US6nrxZdSLcpKcigxZA&sz=w800"
-            alt="Cascade Hideaway address signage — Block 47 Lot 39 Bria Homes"
+            src="https://drive.google.com/thumbnail?id=1vCN3fAoAxr-7RLIbFvdHag__DktOQXMY&sz=w800"
+            alt="Cascade Hideaway — bar counter and bedroom alcove"
             width="800" height="680" loading="lazy" decoding="async"
           >
           <div class="gallery-view-all" aria-hidden="true">
@@ -3190,19 +3797,25 @@
           <p class="booking-body ch-reveal">
             Our calendar stays in sync with live bookings — every available date you see
             is genuinely open. Select your nights, share a few details, and someone from
-            our team will reach out personally to confirm within two hours.
+            our team will reach out personally as soon as your request comes in.
           </p>
 
-          <!-- Soft urgency signal — hospitality psychology -->
+          <!-- Psychology: Social proof + scarcity — stacked for maximum impact -->
+          <!-- 1. Live availability signal (green dot = real-time calendar sync) -->
+          <p class="ch-reveal" style="display:flex; align-items:center; gap:0.5em; font-family:var(--ch-font-body); font-size:var(--step--2); font-weight:500; letter-spacing:0.06em; color:rgb(160 210 170 / 0.80); margin-bottom:0.5em;">
+            <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:rgb(100 200 120); box-shadow:0 0 6px rgb(100 200 120 / 0.7); animation:pulse-dot 2s ease-in-out infinite;" aria-hidden="true"></span>
+            Calendar synced live with all bookings
+          </p>
+          <!-- 2. Soft urgency — evidenced, not fabricated -->
           <p class="ch-reveal" style="font-family:var(--ch-font-body); font-size:var(--step--2); font-weight:500; letter-spacing:0.08em; color:rgb(201 150 58 / 0.65); margin-bottom:var(--space-s);">
             <span aria-hidden="true">◆ </span>This property typically books 2–4 weeks in advance
           </p>
 
           <ul class="booking-perks ch-reveal" aria-label="Booking highlights">
-            <li class="booking-perk">Booking direct means the best rate — always, without exception</li>
-            <li class="booking-perk">Staying five nights or more? Mention it in your message — we will arrange a personal rate</li>
-            <li class="booking-perk">50% reservation fee holds your dates — balance due 24 hours before or at check-in</li>
-            <li class="booking-perk">Your host Marifel responds personally, not through a chatbot</li>
+            <li class="booking-perk">Book direct and save 5&#x2013;18% &#x2014; your discount is shown in real time as you select dates</li>
+            <li class="booking-perk">Cleaning fee always included &#x2014; no surprise charge at checkout</li>
+            <li class="booking-perk">Stay 5 nights or more for a complimentary mid-stay room refresh</li>
+            <li class="booking-perk">50% reservation fee holds your dates &#x2014; balance due at check-in</li>
           </ul>
 
         </div>
@@ -3279,13 +3892,39 @@
               </div>
 
               <div class="form-field">
-                <label class="form-label" for="contact">
-                  Phone or Email<span class="form-required" aria-hidden="true">*</span>
+                <label class="form-label" for="phone">
+                  Phone Number<span class="form-required" aria-hidden="true">*</span>
                 </label>
-                <input class="form-input" type="text" id="contact" name="contact"
-                  autocomplete="off" placeholder="0917 xxx xxxx  or  you@example.com"
-                  aria-required="true" aria-describedby="contact-error" aria-invalid="false">
-                <span class="form-error-msg" id="contact-error" role="alert" hidden></span>
+                <div class="form-input-phone" id="phoneWrapper">
+                  <select class="phone-code-select" id="phoneCode" name="phone_code"
+                    aria-label="Country calling code">
+                    <option value="+63" selected>🇵🇭 +63</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+61">🇦🇺 +61</option>
+                    <option value="+65">🇸🇬 +65</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+971">🇦🇪 +971</option>
+                    <option value="+81">🇯🇵 +81</option>
+                    <option value="+82">🇰🇷 +82</option>
+                    <option value="+66">🇹🇭 +66</option>
+                    <option value="+other">Other</option>
+                  </select>
+                  <input class="phone-number-input" type="tel" id="phone" name="phone"
+                    autocomplete="tel-national" placeholder="917 123 4567"
+                    aria-required="true" aria-describedby="phone-error" aria-invalid="false">
+                </div>
+                <span class="form-error-msg" id="phone-error" role="alert" hidden></span>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="email">
+                  Email Address<span class="form-required" aria-hidden="true">*</span>
+                  <span class="form-label-note">— your booking confirmation is sent here</span>
+                </label>
+                <input class="form-input" type="email" id="email" name="email"
+                  autocomplete="email" placeholder="you@example.com"
+                  aria-required="true" aria-describedby="email-error" aria-invalid="false">
+                <span class="form-error-msg" id="email-error" role="alert" hidden></span>
               </div>
 
               <div class="form-row">
@@ -3307,7 +3946,7 @@
               <div class="form-field">
                 <label class="form-label" for="message">Message / Special Requests</label>
                 <textarea class="form-input form-textarea" id="message" name="message"
-                  rows="3" placeholder="Early check-in, 5-night discount, dietary notes…"
+                  rows="3" placeholder="Is there anything you'd like us to prepare before your stay? We're happy to help."
                   autocomplete="off" aria-describedby="message-hint"></textarea>
                 <span class="form-hint" id="message-hint">
                   Optional — mentioning a 5-night stay here helps us prepare your best rate.
@@ -3340,51 +3979,94 @@
 
             <div class="payment-panel">
 
-              <!-- Booking summary — full breakdown -->
+              <!-- ── BOOKING SUMMARY — 3-zone layout ── -->
               <div class="pay-summary" id="paySummary" aria-label="Booking summary">
+
+                <!-- Zone A header: dates -->
                 <div class="pay-summary-header">
                   <span class="pay-summary-dates" id="paySummaryDates"></span>
-                  <span class="pay-summary-rate-note">₱1,780/night · all-in · no cleaning fee</span>
+                  <span class="pay-summary-rate-note" id="paySummaryRateNote"></span>
                 </div>
-                <div class="pay-summary-breakdown">
 
-                  <!-- Row 1: Total — anchor, quiet -->
-                  <div class="pay-breakdown-row pay-breakdown-total">
-                    <div class="pay-bd-left">
-                      <span class="pay-bd-label" id="payBdTotalLabel"></span>
-                    </div>
-                    <span class="pay-bd-amount" id="payBdTotal"></span>
+                <!-- Zone A body: base → saving → total (anchoring) -->
+                <div class="pay-zone-cost" id="payZoneCost">
+                  <!-- Base cost row — struck through, anchors perception -->
+                  <div class="pay-cost-row" id="payBaseRow">
+                    <span class="pay-cost-label" id="payBdTotalLabel"></span>
+                    <span class="pay-cost-value pay-cost-value--base" id="payBaseTotal"></span>
                   </div>
-
-                  <!-- Row 2: Reservation Fee — gold, pay now -->
-                  <div class="pay-breakdown-row pay-breakdown-fee">
-                    <div class="pay-bd-left">
-                      <span class="pay-bd-label">Reservation Fee <span style="opacity:0.55; font-size:0.88em; font-weight:300;">(50%)</span></span>
-                      <span class="pay-bd-tag pay-bd-tag-now">✦ Send now to hold your dates</span>
-                    </div>
-                    <span class="pay-bd-highlight" id="payBdFee"></span>
+                  <!-- Savings row — positively framed, scales by tier -->
+                  <div class="pay-cost-row pay-cost-row--saving" id="payBdSavingRow" data-intensity="quiet" hidden>
+                    <span class="pay-cost-label">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      You save
+                    </span>
+                    <span class="pay-cost-value" id="payBdSaving"></span>
                   </div>
-
-                  <!-- Row 3: Remaining Balance — clear cream, pay later -->
-                  <div class="pay-breakdown-row pay-breakdown-balance">
-                    <div class="pay-bd-left">
-                      <span class="pay-bd-label">Remaining Balance</span>
-                      <span class="pay-bd-tag pay-bd-tag-later">Due 24 hrs before or at check-in</span>
-                    </div>
-                    <span class="pay-bd-amount-balance" id="payBdBalanceOnly"></span>
+                  <!-- Nudge line — shown under savings when not at 5-night tier -->
+                  <p class="pay-saving-nudge" id="payBdSavingLabel" hidden></p>
+                  <!-- Total row — final price after discount -->
+                  <div class="pay-cost-row pay-cost-row--total">
+                    <span class="pay-cost-label">Total (all-in)</span>
+                    <span class="pay-cost-value" id="payBdTotal"></span>
                   </div>
-
-                  <!-- Row 4: Security Deposit — refundable, reassuring -->
-                  <div class="pay-breakdown-row pay-breakdown-deposit">
-                    <div class="pay-bd-left">
-                      <span class="pay-bd-label">Security Deposit</span>
-                      <span class="pay-bd-tag pay-bd-tag-refund">✓ Fully refundable after check-out</span>
-                    </div>
-                    <span class="pay-bd-amount-deposit">₱1,000</span>
-                  </div>
-
+                  <!-- Cleaning always included -->
+                  <p class="pay-allincl-note" aria-label="Cleaning fee included">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    Cleaning fee included &nbsp;&middot;&nbsp; No platform fees &nbsp;&middot;&nbsp; No surprises
+                  </p>
                 </div>
-              </div>
+
+                <!-- Zone B: Send Now hero — dominant action -->
+                <div class="pay-zone-action">
+                  <!-- OTA savings anchor: you'd pay more through Airbnb — loss aversion framing -->
+                  <div class="pay-ota-saving-chip" id="payOtaChip" hidden aria-live="polite">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span id="payOtaSavingText">Skip Airbnb&#x2019;s guest fee &#x2014; you keep ~&#x20B1;XXX more by booking direct</span>
+                  </div>
+                  <p class="pay-action-eyebrow">Send now to secure your dates</p>
+                  <div class="pay-action-hero">
+                    <div class="pay-action-label">
+                      Reservation Fee
+                      <small>50% of total &middot; holds your dates immediately</small>
+                    </div>
+                    <div class="pay-action-amount">
+                      <span class="pay-amount-currency" aria-hidden="true">&#x20B1;</span><span id="payBdFee"></span>
+                    </div>
+                  </div>
+                  <p class="pay-action-confirm">Your dates are held the moment we receive this payment.</p>
+                </div>
+
+                <!-- Zone C: Later obligations — compact + subordinate -->
+                <div class="pay-zone-later">
+                  <div class="pay-later-row">
+                    <div class="pay-later-left">
+                      <span class="pay-later-label">Remaining Balance</span>
+                      <span class="pay-later-tag pay-later-tag--when">Due 24 hrs before or at check-in</span>
+                    </div>
+                    <span class="pay-later-amount" id="payBdBalanceOnly"></span>
+                  </div>
+                  <div class="pay-later-together" aria-hidden="true">
+                    <span class="pay-later-together-line"></span>
+                    <span class="pay-later-together-label">collected together at check-in</span>
+                    <span class="pay-later-together-line"></span>
+                  </div>
+                  <div class="pay-later-row">
+                    <div class="pay-later-left">
+                      <span class="pay-later-label">Refundable Security Deposit</span>
+                      <span class="pay-later-tag pay-later-tag--refund">&#x2713; Returned in full after smooth check-out</span>
+                    </div>
+                    <span class="pay-later-amount pay-later-amount--deposit">&#x20B1;1,000</span>
+                  </div>
+                </div>
+
+                <!-- Zone D: Trust seal -->
+                <div class="pay-zone-trust" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Direct booking &nbsp;&middot;&nbsp; Best rate guaranteed &nbsp;&middot;&nbsp; Pure value at direct price
+                </div>
+
+              </div><!-- /.pay-summary -->
 
               <!-- Reservation instruction -->
               <p class="pay-deposit-note">
@@ -3402,7 +4084,7 @@
                 <button class="pay-tab is-active" id="tabGcash" role="tab"
                   aria-selected="true"  aria-controls="paneGcash"  type="button">GCash</button>
                 <button class="pay-tab"           id="tabBank"  role="tab"
-                  aria-selected="false" aria-controls="paneBank"   type="button">Bank Transfer</button>
+                  aria-selected="false" aria-controls="paneBank"   type="button">Bank Transfer<span class="pay-tab-badge" aria-label="Recommended">Recommended</span></button>
               </div>
 
               <!-- GCash pane -->
@@ -3427,6 +4109,18 @@
                     </p>
                   </div>
                 </div>
+
+                <!-- GCash delay notice — psychology: friction/loss framing + easy escape to bank tab -->
+                <div class="pay-gcash-delay-note" role="note" aria-label="GCash payment notice">
+                  <span class="pay-gcash-delay-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  </span>
+                  <div class="pay-gcash-delay-body">
+                    <span class="pay-gcash-delay-heading">GCash is for GCash-to-GCash transfers only</span>
+                    <p>GCash Send Money to other banks or e-wallets can take <strong style="color:rgb(247 242 232 / 0.72);">up to 48 hours</strong> to reflect — which delays your booking confirmation. If you're sending from BDO, BPI, Maya, or any other bank, please use <button class="pay-switch-to-bank-btn" id="switchToBankBtn" type="button">Bank Transfer (UnionBank InstaPay)</button> instead for instant confirmation.</p>
+                  </div>
+                </div>
+
                 <!-- Action buttons -->
                 <div class="pay-action-row">
                   <a href="gcash://" class="pay-action-btn pay-action-btn-primary" id="openGcashBtn"
@@ -3449,6 +4143,18 @@
 
               <!-- Bank Transfer pane -->
               <div class="pay-pane" id="paneBank" role="tabpanel" aria-labelledby="tabBank">
+
+                <!-- InstaPay instant confirmation notice -->
+                <div class="pay-bank-instant-note" role="note" aria-label="Bank transfer note">
+                  <span class="pay-bank-instant-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="pay-bank-instant-body">
+                    <span class="pay-bank-instant-heading">Instant confirmation via InstaPay</span>
+                    <p>Works from any Philippine bank or e-wallet — BDO, BPI, Maya, Metrobank, and more. Transfers typically reflect within <strong style="color:rgb(140 210 150 / 0.90);">a few minutes</strong>, so your booking is confirmed faster.</p>
+                  </div>
+                </div>
+
                 <!-- UnionBank QR -->
                 <div class="pay-bank-qr-row">
                   <div class="pay-qr-wrap">
@@ -3580,74 +4286,169 @@
 
             <!-- Slide 1 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 1">
-              <img src="https://drive.google.com/thumbnail?id=1aXhaukQmmzMHQ9ZRi5kDLGlnz1jb2_h-&sz=w1200"
-                   alt="Cascade Hideaway — property photo 1" loading="eager" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1qIKNaRvmEbcRHXZ6d4ppLkAOmDDGPquZ&sz=w1200"
+                   alt="Modern exterior of Cascade Hideaway." loading="eager" width="1200" height="900">
             </div>
             <!-- Slide 2 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 2">
-              <img src="https://drive.google.com/thumbnail?id=1qIKNaRvmEbcRHXZ6d4ppLkAOmDDGPquZ&sz=w1200"
-                   alt="Cascade Hideaway — property photo 2" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1adY7ZHf8Az2rdnxCncGGnliTiDNzg8Bq&sz=w1200"
+                   alt="Advanced smart lock for effortless, secure guest entry." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 3 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 3">
-              <img src="https://drive.google.com/thumbnail?id=1H6tAcq-vM7zLKY4IkCwBOCCEyqbQfqL9&sz=w1200"
-                   alt="Cascade Hideaway — property photo 3" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1W1Fs7IhUPOI5i1kVe1RkY5V-BWN4M2SZ&sz=w1200"
+                   alt="Cascade Hideaway — welcoming entryway." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 4 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 4">
-              <img src="https://drive.google.com/thumbnail?id=1cn8gUHcisT6WUNUYSo3bIpYhgLH9yrwA&sz=w1200"
-                   alt="Cascade Hideaway — property photo 4" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=11ozbfmpez2kvTXUdJFyGfBeyltHOGo7J&sz=w1200"
+                   alt="Open-concept living area designed for relaxation." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 5 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 5">
-              <img src="https://drive.google.com/thumbnail?id=1HLiyCQTD52S7scOmYiPdbxyLhkOPy4bs&sz=w1200"
-                   alt="Cascade Hideaway — property photo 5" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1tUOAE8_mN26s38nDZr1hKFAj7kCdFcH1&sz=w1200"
+                   alt="Modern smart TV setup for a premium viewing experience." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 6 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 6">
-              <img src="https://drive.google.com/thumbnail?id=17g3693IFC5XUXFXC6XcCy_RfJpX5mglv&sz=w1200"
-                   alt="Cascade Hideaway — property photo 6" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1WUm3nIrGeVtWN2jNl4SfnskZTHjSwrHu&sz=w1200"
+                   alt="Cascade Hideaway — bright and airy living space." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 7 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 7">
-              <img src="https://drive.google.com/thumbnail?id=1NFyA74N7GjErnLCZc7td59weHNi-qC6o&sz=w1200"
-                   alt="Cascade Hideaway — property photo 7" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1aXhaukQmmzMHQ9ZRi5kDLGlnz1jb2_h-&sz=w1200"
+                   alt="Multi-functional bar counter for dining and focused work." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 8 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 8">
-              <img src="https://drive.google.com/thumbnail?id=1yRfqhTM2UKv2bo7rkL_EomeV5N7okX9-&sz=w1200"
-                   alt="Cascade Hideaway — property photo 8" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1cn8gUHcisT6WUNUYSo3bIpYhgLH9yrwA&sz=w1200"
+                   alt="Thoughtfully curated table setting." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 9 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 9">
-              <img src="https://drive.google.com/thumbnail?id=15OzuMenBQJeI1PPKZ2RZlu8g9NLBfdF3&sz=w1200"
-                   alt="Cascade Hideaway — property photo 9" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1TViBfOld0sR7DmlNorawuI7501lsoVZL&sz=w1200"
+                   alt="Queen-sized bed with plush linens for a restorative night's sleep." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 10 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 10">
-              <img src="https://drive.google.com/thumbnail?id=1HuCvG-r61s3qpqS9uK3qj-0zozjakVg2&sz=w1200"
-                   alt="Cascade Hideaway — property photo 10" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1HLiyCQTD52S7scOmYiPdbxyLhkOPy4bs&sz=w1200"
+                   alt="Crisp, hotel-grade pillows and soft, inviting duvets." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 11 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 11">
-              <img src="https://drive.google.com/thumbnail?id=1adY7ZHf8Az2rdnxCncGGnliTiDNzg8Bq&sz=w1200"
-                   alt="Cascade Hideaway — property photo 11" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1IPvwjlLNbjNLNw9sZ4ZJlbvHLrGn-VV9&sz=w1200"
+                   alt="Cascade Hideaway — serene sleeping nook." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 12 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 12">
-              <img src="https://drive.google.com/thumbnail?id=1vleWYcw5BqNzUvuONPV6ZxH-OYdefzxw&sz=w1200"
-                   alt="Cascade Hideaway — property photo 12" loading="lazy" width="1200" height="675">
+              <img src="https://drive.google.com/thumbnail?id=1jZvNngX6-jiH83rv9D7sFWTNQZ9v7VsO&sz=w1200"
+                   alt="Cascade Hideaway — cozy evening bedroom ambiance." loading="lazy" width="1200" height="900">
             </div>
             <!-- Slide 13 -->
             <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 13">
+              <img src="https://drive.google.com/thumbnail?id=1aKSZSza0goW3d3GqT7FRja4YNIZPALmA&sz=w1200"
+                   alt="Clean, modern kitchenette with all essential cooking tools." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 14 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 14">
+              <img src="https://drive.google.com/thumbnail?id=1NFyA74N7GjErnLCZc7td59weHNi-qC6o&sz=w1200"
+                   alt="Inviting coffee station for the perfect morning start." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 15 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 15">
+              <img src="https://drive.google.com/thumbnail?id=1yRfqhTM2UKv2bo7rkL_EomeV5N7okX9-&sz=w1200"
+                   alt="Cascade Hideaway — fully equipped kitchen." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 16 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 16">
+              <img src="https://drive.google.com/thumbnail?id=15OzuMenBQJeI1PPKZ2RZlu8g9NLBfdF3&sz=w1200"
+                   alt="Cascade Hideaway — clean and modern finish." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 17 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 17">
+              <img src="https://drive.google.com/thumbnail?id=1HuCvG-r61s3qpqS9uK3qj-0zozjakVg2&sz=w1200"
+                   alt="Cascade Hideaway — styled with warmth." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 18 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 18">
+              <img src="https://drive.google.com/thumbnail?id=1vleWYcw5BqNzUvuONPV6ZxH-OYdefzxw&sz=w1200"
+                   alt="Pristine, well-lit bathroom with modern fixtures." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 19 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 19">
+              <img src="https://drive.google.com/thumbnail?id=1ZVpoDP3FsDSkAffi3vVlQjz6CyQZPvzN&sz=w1200"
+                   alt="Boutique-style towel presentation and guest toiletries." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 20 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 20">
+              <img src="https://drive.google.com/thumbnail?id=1l1iZXmmUUt4Ov4gLqewsk15U1YhMwe0W&sz=w1200"
+                   alt="Cascade Hideaway — carefully styled corner." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 21 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 21">
+              <img src="https://drive.google.com/thumbnail?id=1R4XpwzJr0JSs06P_nczmM3J28vX7Bb5a&sz=w1200"
+                   alt="Cascade Hideaway — amenity-rich stay." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 22 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 22">
+              <img src="https://drive.google.com/thumbnail?id=1JJK7n1cdFOlSvkeGZQsIWS4rT2Ba5dTJ&sz=w1200"
+                   alt="In-unit laundry for guest convenience." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 23 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 23">
+              <img src="https://drive.google.com/thumbnail?id=1noahKJaG4HE_yR5DxK6HEVqerDUjtTtY&sz=w1200"
+                   alt="Cascade Hideaway — boutique property detail." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 24 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 24">
+              <img src="https://drive.google.com/thumbnail?id=16UA7-9GCEaRw_QUvdrdsRPwpvGl4Q32M&sz=w1200"
+                   alt="Cascade Hideaway — restful private retreat." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 25 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 25">
+              <img src="https://drive.google.com/thumbnail?id=1RsarOJvIXMPTUNZOe0IhNPC95TMudheY&sz=w1200"
+                   alt="Cascade Hideaway — thoughtfully prepared space." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 26 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 26">
+              <img src="https://drive.google.com/thumbnail?id=1XjuKBjRPmV6Vc1YqjQ2Fg0InMx4sTm9X&sz=w1200"
+                   alt="Cascade Hideaway — warm and welcoming interior." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 27 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 27">
+              <img src="https://drive.google.com/thumbnail?id=1ZZ4q-jb_4MVaPZBH25gD9d90O_QwrfNp&sz=w1200"
+                   alt="Refreshing community swimming pool." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 28 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 28">
+              <img src="https://drive.google.com/thumbnail?id=1ZQ1jSTuvxCdFLrWNbo1WhsK-FZr-dTGK&sz=w1200"
+                   alt="Secure gated entrance at Bria Homes." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 29 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 29">
+              <img src="https://drive.google.com/thumbnail?id=1PRAx7UW_NjpKWzsyj9wpKCU61RMiEU9o&sz=w1200"
+                   alt="Cascade Hideaway — community amenities." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 30 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 30">
+              <img src="https://drive.google.com/thumbnail?id=1v2oG_oFe3Mzwom_N2nJTiwIZSiscTjk4&sz=w1200"
+                   alt="Comprehensive guest manual with local tips." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 31 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 31">
               <img src="https://drive.google.com/thumbnail?id=1-xK2s9E4cxIbwJ2fBqrFpb3zuQQNyVqI&sz=w1200"
-                   alt="Cascade Hideaway — property photo 13" loading="lazy" width="1200" height="675">
+                   alt="Living area in warm evening light." loading="lazy" width="1200" height="900">
+            </div>
+            <!-- Slide 32 -->
+            <div class="gallery-slide" role="img" aria-label="Cascade Hideaway property photo 32">
+              <img src="https://drive.google.com/thumbnail?id=15cxm9Cua1Km0yNyPBFDr6RGBLwGSK85y&sz=w1200"
+                   alt="Cascade Hideaway — evening serenity." loading="lazy" width="1200" height="900">
             </div>
 
           </div><!-- /.gallery-track -->
 
           <!-- Slide counter -->
-          <div class="gallery-counter" id="galleryCounter" aria-live="polite" aria-atomic="true">1 / 13</div>
+          <div class="gallery-counter" id="galleryCounter" aria-live="polite" aria-atomic="true">1 / 32</div>
 
           <!-- Prev / Next -->
           <button class="gallery-btn gallery-btn-prev" id="galleryPrev"
@@ -3745,25 +4546,9 @@
         <!-- Direct contact CTAs -->
         <div class="loc-cta-group" aria-label="Reach us directly">
 
-          <!-- WhatsApp — dominant PH channel -->
-          <a class="loc-cta-btn is-whatsapp"
-             href="https://wa.me/639618056979?text=Hi%2C%20I%27d%20like%20to%20book%20Cascade%20Hideaway"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="Send a WhatsApp message to Cascade Reservations">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.907-1.425A9.958 9.958 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 0 1-4.076-1.112l-.292-.173-3.012.875.857-3.024-.191-.31A7.958 7.958 0 0 1 4 12a8 8 0 1 1 16 0 8 8 0 0 1-8 8z"/>
-            </svg>
-            <span class="loc-cta-label">
-              <strong>WhatsApp Us</strong>
-              <span>Ms. Jary · quick replies</span>
-            </span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:0.3; width:11px; height:11px; flex-shrink:0;"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </a>
-
           <!-- Facebook Messenger -->
           <a class="loc-cta-btn is-messenger"
-             href="https://m.me/CascadeReservations"
+             href="https://web.facebook.com/profile.php?id=61578158229299"
              target="_blank" rel="noopener noreferrer"
              aria-label="Send a message on Facebook Messenger">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -3771,13 +4556,13 @@
             </svg>
             <span class="loc-cta-label">
               <strong>Message on Messenger</strong>
-              <span>Quick replies · typically within the hour</span>
+              <span>We respond personally</span>
             </span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:0.3; width:11px; height:11px; flex-shrink:0;"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
 
           <!-- Email with pre-filled subject -->
-          <a class="loc-cta-btn" id="contactEmailBtn" href="mailto:cascadereservations@gmail.com?subject=Booking%20Enquiry%20—%20Cascade%20Hideaway" aria-label="Send an email to Cascade Reservations">
+          <a class="loc-cta-btn" id="contactEmailBtn" href="mailto:cascadereservations@gmail.com" aria-label="Send an email to Cascade Reservations">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <span class="loc-cta-label">
               <strong>Email Us</strong>
@@ -3799,10 +4584,92 @@
   <div class="sticky-cta-bar" id="stickyCta" aria-hidden="true">
     <div class="sticky-cta-rate">
       <small>From</small>
-      ₱1,780 / night
+      &#x20B1;1,780 / night
     </div>
     <a href="#booking" class="sticky-cta-btn" tabindex="-1">Book Direct</a>
   </div>
+
+  <!-- ============================================================
+       STAY DETAILS — hidden until booking confirmed
+       Progressive disclosure: revealed by JS after successful submit
+       Gives guests time to emotionally close the modal before
+       seeing destination/navigation info they'll need later
+  ============================================================ -->
+  <section class="stay-details-section" id="stayDetails" hidden aria-labelledby="stayDetailsTitle">
+    <div class="stay-details-inner">
+
+      <!-- Left: address + checkin + navigation shortcuts -->
+      <div class="stay-address-col ch-reveal">
+        <p class="stay-label">Your Destination</p>
+        <h2 class="stay-property-name" id="stayDetailsTitle">
+          Cascade
+          <em>Hideaway</em>
+        </h2>
+        <div class="stay-address">
+          <strong>Exact address</strong>
+          Block 47, Lot 39<br>
+          Bria Homes, Conel Road<br>
+          Brgy. San Isidro, General Santos City 9500
+          <p class="stay-address-note">Revealed here after your booking is submitted &middot; keep it safe</p>
+        </div>
+
+        <span class="stay-checkin-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Check-in from 2:00 PM &nbsp;&middot;&nbsp; Check-out by 12:00 PM
+        </span>
+
+        <!-- Navigation shortcuts below check-in info -->
+        <div class="stay-shortcuts" role="group" aria-label="Get directions">
+          <a class="stay-shortcut-btn"
+             href="https://waze.com/ul?ll=6.1545,125.1852&navigate=yes&zoom=17"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Navigate with Waze">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="9" r="6"/>
+              <path d="M9.5 8.5a1 1 0 1 0 2 0 1 1 0 0 0-2 0M12.5 8.5a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/>
+              <path d="M10 12c.5.3 1.1.5 2 .5s1.5-.2 2-.5"/>
+              <path d="M12 15v3M10 18h4"/>
+            </svg>
+            <span class="stay-shortcut-label">Waze</span>
+          </a>
+          <a class="stay-shortcut-btn"
+             href="https://d.grab.com/g/passenger-transport-auto-book?destlat=6.1545&destlng=125.1852&destaddr=Cascade+Hideaway+Block+47+Lot+39+Bria+Homes+General+Santos+City"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Book a Grab car to the property">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="8" width="20" height="10" rx="2"/>
+              <path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+              <circle cx="7.5" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+              <circle cx="16.5" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="stay-shortcut-label">Grab Car</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right: pinned Google Maps embed -->
+      <div class="stay-map-col ch-reveal">
+        <iframe
+          class="stay-map-iframe"
+          title="Cascade Hideaway location — Bria Homes, General Santos City"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3625.9235223134037!2d125.1852321!3d6.154546900000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f79f006c76f131%3A0x9b43f718faeded54!2sCascade%20Hideaway!5e1!3m2!1sen!2sph!4v1773526665301!5m2!1sen!2sph"
+          aria-label="Google Maps showing Cascade Hideaway pinned location in Bria Homes General Santos City"
+        ></iframe>
+        <a class="stay-map-open"
+           href="https://maps.app.goo.gl/WW61L7WzBX4UBmqk7"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Open Cascade Hideaway in Google Maps">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ============================================================
        FOOTER
@@ -3832,65 +4699,95 @@
     <div class="success-dialog">
 
       <button class="success-close" id="successClose" aria-label="Close this message">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
 
-      <div class="booking-success-check" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+      <!-- A: Celebration header — dark mahogany band, celebratory tone -->
+      <div class="success-header">
+        <div class="booking-success-check" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <!-- "Reservation Received" = definitive, complete — not "almost there" which implies incomplete -->
+        <h3 class="booking-success-title" id="successTitle">Reservation Received</h3>
+        <!-- Certainty language: your spot is secured, not conditional -->
+        <p class="success-subtitle">Your spot is secured &mdash; we&rsquo;re on it</p>
       </div>
 
-      <h3 class="booking-success-title" id="successTitle">Reservation Received</h3>
-
-      <p class="booking-success-body">
-        Your reservation request has been received and we are on it.
-        Our team will verify your reservation fee and confirm your dates
-        as soon as possible.
-        <br><br>
-        Need to reach us? Email
-        <a href="mailto:cascadereservations@gmail.com">cascadereservations@gmail.com</a>
-        or
-        <a href="https://wa.me/639618056979" target="_blank" rel="noopener noreferrer" style="color:var(--ch-gold);">WhatsApp us</a>
-        and we will respond right away.
-      </p>
-
-      <!-- Calendar reminder -->
-      <a class="success-cal-btn" id="successCalBtn" href="#" target="_blank" rel="noopener noreferrer"
-         aria-label="Add a follow-up reminder to Google Calendar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-          <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/>
-        </svg>
-        Add Confirmation Reminder to Calendar
-      </a>
-      <p class="success-cal-note">Opens Google Calendar — adds a follow-up reminder so you know when to expect our confirmation</p>
-
-      <!-- Address reveal + directions — only shown after booking submitted -->
-      <div class="success-address-reveal">
-        <strong>Your destination</strong>
-        Block 47, Lot 39 · Bria Homes, Conel Road<br>
-        Brgy. San Isidro, General Santos City 9500
+      <!-- B: What happens next — cream paper, dark text, clear expectations -->
+      <!-- Psychology: peak-end rule + uncertainty reduction. Short steps, definite language.
+           No time commitments. Ends on "nothing else to do" = completion + relief. -->
+      <div class="success-next-steps" aria-label="What happens next">
+        <p class="success-steps-eyebrow">What happens next</p>
+        <div class="success-step">
+          <span class="success-step-num" aria-hidden="true">1</span>
+          <p class="success-step-text">We&rsquo;ll <strong>verify your payment</strong> and confirm your dates. You&rsquo;ll hear from us soon.</p>
+        </div>
+        <div class="success-step">
+          <span class="success-step-num" aria-hidden="true">2</span>
+          <p class="success-step-text">You&rsquo;ll receive a <strong>personal confirmation</strong> with your check-in code, exact address, and any notes.</p>
+        </div>
+        <div class="success-step">
+          <span class="success-step-num" aria-hidden="true">3</span>
+          <!-- Completion framing: "nothing else to do right now" = task complete, relief -->
+          <p class="success-step-text">Remaining balance and deposit are <strong>collected at check-in</strong> &mdash; nothing else to do right now.</p>
+        </div>
       </div>
-      <a class="success-directions-btn"
-         href="https://www.google.com/maps/dir/?api=1&destination=Cascade+Hideaway+Block+47+Lot+39+Bria+Homes+Conel+Road+Brgy+San+Isidro+General+Santos+City+9500+Philippines"
-         target="_blank" rel="noopener noreferrer"
-         aria-label="Get directions to Cascade Hideaway in Google Maps">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        Get Directions
-      </a>
 
-      <button class="success-done-btn" id="successDone">Done</button>
+      <!-- C: Reach us — no time promises, warm tone -->
+      <div class="success-reach">
+        <p class="success-reach-label">Any questions? Reach us directly</p>
+        <div class="success-reach-btns">
+          <a class="success-reach-btn success-reach-btn--messenger"
+             href="https://web.facebook.com/profile.php?id=61578158229299"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Message us on Facebook Messenger">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.906 1.356 5.504 3.494 7.261V22l3.18-1.752A10.5 10.5 0 0 0 12 20.486c5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.03 12.44-2.545-2.713-4.969 2.713 5.468-5.804 2.608 2.713 4.907-2.713-5.469 5.804z"/>
+            </svg>
+            <span class="success-reach-btn-text">
+              <span class="success-reach-btn-title">Messenger</span>
+              <span class="success-reach-btn-sub">We respond personally</span>
+            </span>
+          </a>
+          <a class="success-reach-btn" href="mailto:cascadereservations@gmail.com" aria-label="Email Cascade Reservations">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span class="success-reach-btn-text">
+              <span class="success-reach-btn-title">Email Us</span>
+              <span class="success-reach-btn-sub">cascadereservations@gmail.com</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- D: Footer — warm gold CTA + personal host signature -->
+      <div class="success-footer">
+        <a class="success-cal-btn" id="successCalBtn" href="#" target="_blank" rel="noopener noreferrer"
+           aria-label="Add a follow-up reminder to Google Calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          Add Check-in Reminder
+        </a>
+        <!-- Gold primary CTA — draws the eye, completes the action loop -->
+        <button class="success-done-btn" id="successDone">View Directions &darr;</button>
+        <!-- Personal warmth: host signature anchors trust, softens the close -->
+        <p class="success-signature">Marifel &amp; The Cascade Team</p>
+      </div>
 
     </div>
   </div>
@@ -3898,6 +4795,7 @@
   <!-- ============================================================
        SCRIPTS
   ============================================================ -->
+  
   <script>
     /* ── Sticky mobile CTA bar ── */
     (function () {
@@ -4028,11 +4926,14 @@
        * Files must have "Anyone with link can view" sharing (same as gallery).
        */
       var SLIDES = [
-        { id: '1wzkooPfoOsa2GzWcixHuZ6xYBf54munt', alt: 'Cascade Hideaway entrance and welcome gate' },
-        { id: '1kIwtCJt7EUyNhkm_n3yuboZUcWhrl-ED', alt: 'Studio layout — sofa and sleeping area' },
-        { id: '1iZwQzGq8_yYhihgg2et13eUhre5q4143', alt: 'Queen bed with hotel-grade linens' },
-        { id: '17ovWXKWIgi-aTYkBehm4pgMuyR1RrMgQ', alt: 'Front facade of Cascade Hideaway' },
-        { id: '1jIsHRgph5HjgACl3tM2u0E8ybzYx974s', alt: 'Sala — living area with smart TV' }
+        { id: '1kIwtCJt7EUyNhkm_n3yuboZUcWhrl-ED', alt: 'Studio living and sleeping area — sofa and bed' },
+        { id: '1iZwQzGq8_yYhihgg2et13eUhre5q4143', alt: 'Hotel-quality bed with crisp linens' },
+        { id: '1jIsHRgph5HjgACl3tM2u0E8ybzYx974s', alt: 'Cascade Hideaway — living area with smart TV' },
+        { id: '1wzkooPfoOsa2GzWcixHuZ6xYBf54munt', alt: 'Cascade Hideaway entrance' },
+        { id: '17ovWXKWIgi-aTYkBehm4pgMuyR1RrMgQ', alt: 'Cascade Hideaway front exterior' },
+        { id: '1b66VVq8egMtHQGdMkopN2TN5KN8tauW_', alt: 'Modern bathroom' },
+        { id: '1vCN3fAoAxr-7RLIbFvdHag__DktOQXMY', alt: 'Bar counter and bedroom combined' },
+        { id: '12_MSXiPDg2g5iv0xzvuoYSdIaWIHrSuR', alt: 'Kitchen counter and appliances' }
       ];
       var BASE = 'https://drive.google.com/thumbnail?id=';
       var SZ   = '&sz=w1920';
@@ -4045,6 +4946,7 @@
       SLIDES.forEach(function (s, i) {
         var div = document.createElement('div');
         div.className = 'hero-slide' + (i === 0 ? ' is-active' : '');
+        /* aria-hidden: decorative background; container has the accessible label */
         div.setAttribute('aria-hidden', 'true');
 
         var img = document.createElement('img');
@@ -4165,8 +5067,19 @@
       'use strict';
 
       /* ─── Config ─────────────────────────────────────────────────── */
-      var RATE       = 1780;
+      var BASE_RATE  = 1780;
       var MIN_NIGHTS = 2;
+
+      /* Direct-booking discount tiers */
+      function getTier(n) {
+        if (n >= 28) return { rate: 1460, disc: 18, label: '18% off · Monthly' };
+        if (n >= 14) return { rate: 1495, disc: 16, label: '16% off · Fortnightly' };
+        if (n >= 7)  return { rate: 1531, disc: 14, label: '14% off · Weekly' };
+        if (n >= 5)  return { rate: 1566, disc: 12, label: '12% off + free mid-stay clean' };
+        if (n >= 2)  return { rate: 1638, disc:  8, label: '8% off · Extended stay' };
+        return               { rate: 1691, disc:  5, label: '5% off · Direct booking' };
+      }
+      function calcTotal(n) { return getTier(n).rate * n; }
       var MS_DAY     = 86400000;
       var MAX_FILE   = 5 * 1024 * 1024;
 
@@ -4182,7 +5095,8 @@
         checkin:   null, checkout: null,
         selecting: 'checkin',
         blocked:   [], loaded: false,
-        receiptB64: null, receiptName: null, receiptMime: null
+        receiptB64: null, receiptName: null, receiptMime: null,
+          receiptUrl: '', receiptFileId: '', receiptReading: false
       };
 
       /* ─── DOM refs ────────────────────────────────────────────────── */
@@ -4333,12 +5247,17 @@
 
       function updateSelection() {
         if (!state.checkin||!state.checkout){ calSelection.hidden=true; return; }
-        var n=nights(state.checkin,state.checkout), total=n*RATE;
+        var n=nights(state.checkin,state.checkout);
+        var baseTotal=1780*n;
+        var tier=getTier(n);
         calSelDates.textContent=fmtDate(state.checkin)+' \u2192 '+fmtDate(state.checkout);
-        calSelPrice.textContent='\u20B1'+total.toLocaleString('en-PH')+' \u00B7 '+n+' night'+(n!==1?'s':'');
-        calSelNote.textContent=n>=5
-          ?'5+ nights \u2014 mention in the message to request our extended-stay rate.'
-          :'All-in rate \u00B7 no cleaning fee \u00B7 no hidden charges';
+        /* Show base total — discounted price revealed at payment step */
+        calSelPrice.textContent='\u20B1'+baseTotal.toLocaleString('en-PH')+' \u00B7 '+n+' night'+(n!==1?'s':'');
+        /* Teaser — hint at discount without showing exact amount here */
+        var teaserParts=[];
+        if (tier.disc>0) teaserParts.push('\u20B1'+tier.rate+'/night after '+tier.disc+'% direct discount');
+        teaserParts.push('cleaning always included');
+        calSelNote.textContent=teaserParts.join(' \u00B7 ')+' \u2014 final total shown at payment';
         calSelection.hidden=false;
       }
 
@@ -4359,32 +5278,51 @@
       });
 
       /* ─── iCal fetch via JSONP ────────────────────────────────────── */
+      var calFetchAttempt = 0;
       function fetchBlockedDates() {
         var endpoint=bookingForm.dataset.gasEndpoint;
         if (!endpoint){ render(); return; }
-        calLoadingBar.hidden=false;
+        if (calLoadingBar) calLoadingBar.hidden=false;
         var cbName='_chCal_'+Date.now();
         var script=document.createElement('script');
-        var timer=setTimeout(function(){ onCalErr('Request timed out'); }, 12000);
+
+        function cleanupJSONP(){
+          if (window[cbName]) delete window[cbName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        /* 25 s covers GAS cold-start (~10-20 s). On first timeout, retry
+           once automatically before showing the error banner.              */
+        var timer=setTimeout(function(){
+          cleanupJSONP();
+          if (calFetchAttempt < 1) {
+            calFetchAttempt++;
+            console.warn('[calendar] Cold-start timeout — retrying (attempt 2)');
+            fetchBlockedDates();
+          } else {
+            onCalErr('Request timed out after 2 attempts');
+          }
+        }, 25000);
 
         window[cbName]=function(data){
           clearTimeout(timer);
-          delete window[cbName];
-          if (script.parentNode) script.parentNode.removeChild(script);
+          cleanupJSONP();
           if (data&&data.error){ onCalErr(data.error); return; }
           state.loaded=true;
           state.blocked=(data.blocked||[]).filter(function(ev){ return ev.start&&ev.end&&ev.start<ev.end; });
-          calLoadingBar.hidden=true;
-          calFreshness.textContent='Availability synced from Airbnb'+(data.cached?' \u00B7 cached':' \u00B7 live')+' \u2014 refresh for latest';
+          if (calLoadingBar) calLoadingBar.hidden=true;
+          if (calFreshness) calFreshness.textContent='Availability synced from Airbnb'+(data.cached?' \u00B7 cached':' \u00B7 live')+' \u2014 refresh for latest';
           render();
         };
-        script.onerror=function(){ clearTimeout(timer); delete window[cbName]; onCalErr('Script load failed'); };
+        script.onerror=function(){ clearTimeout(timer); cleanupJSONP(); onCalErr('Script load failed'); };
 
         function onCalErr(msg){
           console.warn('[calendar]',msg);
-          calLoadingBar.hidden=true;
-          calErrorBanner.textContent='Live availability could not be loaded \u2014 our team will double-check before confirming.';
-          calErrorBanner.hidden=false;
+          if (calLoadingBar) calLoadingBar.hidden=true;
+          if (calErrorBanner){
+            calErrorBanner.textContent='Live availability could not be loaded \u2014 our team will double-check before confirming.';
+            calErrorBanner.hidden=false;
+          }
           state.loaded=true;
           render();
         }
@@ -4402,28 +5340,78 @@
         }
         dateError.hidden=true;
         var ok=true;
-        ['name','contact','guests'].forEach(function(id){
+        ['name','phone','email','guests'].forEach(function(id){
           var el=document.getElementById(id);
           if (el&&!validateField(el)) ok=false;
         });
-        if (!ok){ var bad=bookingForm.querySelector('.is-invalid'); if (bad) bad.focus(); return; }
+        if (!ok){
+          var bad=bookingForm.querySelector('.is-invalid'); if (bad) bad.focus();
+          syncPhoneWrapperState(document.getElementById('phone') && document.getElementById('phone').classList.contains('is-invalid'));
+          return;
+        }
 
-        var n=nights(state.checkin,state.checkout), total=n*RATE, dep=Math.ceil(total*0.5);
-        var balanceOnly=total-dep; /* remaining 50% — security deposit is fixed ₱1,000 shown statically */
-        state.dep = dep; /* persist for payment button handlers */
+        var n=nights(state.checkin,state.checkout), total=calcTotal(n), dep=Math.ceil(total*0.5);
+        var balanceOnly=total-dep;
+        state.dep = dep;
 
-        /* Populate breakdown */
-        paySummaryDates.textContent=fmtDate(state.checkin)+' \u2192 '+fmtDate(state.checkout)+' \u00B7 '+n+' night'+(n!==1?'s':'');
-        var bdTotalLabel=document.getElementById('payBdTotalLabel');
-        var bdTotal=document.getElementById('payBdTotal');
-        var bdFee=document.getElementById('payBdFee');
-        var bdBalanceOnly=document.getElementById('payBdBalanceOnly');
-        var gcashHint=document.getElementById('gcashAmountHint');
-        if (bdTotalLabel) bdTotalLabel.textContent=n+' night'+(n!==1?'s':'')+' \u00D7 \u20B11,780';
-        if (bdTotal) bdTotal.textContent='\u20B1'+total.toLocaleString('en-PH');
-        if (bdFee) bdFee.textContent='\u20B1'+dep.toLocaleString('en-PH');
-        if (bdBalanceOnly) bdBalanceOnly.textContent='\u20B1'+balanceOnly.toLocaleString('en-PH');
-        if (gcashHint) gcashHint.textContent='\u20B1'+dep.toLocaleString('en-PH');
+        var tier        = getTier(n);
+        var baseTotal   = 1780 * n;
+        var savingsTotal= baseTotal - total;
+
+        /* Zone A header */
+        paySummaryDates.textContent = fmtDate(state.checkin) + ' \u2192 ' + fmtDate(state.checkout) + ' \u00B7 ' + n + ' night' + (n!==1?'s':'');
+        var rNote = document.getElementById('paySummaryRateNote');
+        if (rNote) rNote.textContent = '\u20B1' + tier.rate + '/night' + (tier.disc > 0 ? ' \u00B7 ' + tier.disc + '% off' : '') + ' \u00B7 all-in';
+
+        /* Zone A cost rows */
+        var bdTotalLabel  = document.getElementById('payBdTotalLabel');
+        var bdBaseTotal   = document.getElementById('payBaseTotal');
+        var bdTotal       = document.getElementById('payBdTotal');
+        var bdSavingRow   = document.getElementById('payBdSavingRow');
+        var bdSaving      = document.getElementById('payBdSaving');
+        var bdSavingLabel = document.getElementById('payBdSavingLabel');
+
+        if (bdTotalLabel) bdTotalLabel.textContent = n + ' night' + (n!==1?'s':'') + ' \u00D7 \u20B11,780';
+        if (bdBaseTotal) bdBaseTotal.textContent = '\u20B1' + baseTotal.toLocaleString('en-PH');
+        if (bdTotal) bdTotal.textContent = '\u20B1' + total.toLocaleString('en-PH');
+
+        /* Savings row */
+        if (bdSavingRow && savingsTotal > 0) {
+          var intensity = tier.disc >= 16 ? 'max' : tier.disc >= 14 ? 'high' : tier.disc >= 12 ? 'medium' : tier.disc >= 8 ? 'low' : 'quiet';
+          bdSavingRow.setAttribute('data-intensity', intensity);
+          if (bdSaving) bdSaving.textContent = '\u20B1' + savingsTotal.toLocaleString('en-PH');
+          var nudge = '';
+          /* Derive nudge savings from getTier() so rate changes need only one edit */
+          if (n === 1) nudge = 'Stay 2+ nights \u2014 save \u20B1' + ((BASE_RATE-getTier(2).rate)*2).toLocaleString('en-PH') + ' total';
+          else if (n >= 2 && n <= 4) nudge = 'Stay 5 nights \u2014 unlock free mid-stay clean & save \u20B1' + ((BASE_RATE-getTier(5).rate)*5).toLocaleString('en-PH');
+          else if (n >= 5 && n <= 6) nudge = 'Stay 7 nights \u2014 save \u20B1' + ((BASE_RATE-getTier(7).rate)*7).toLocaleString('en-PH') + ' total';
+          else if (n >= 7 && n <= 13) nudge = 'Stay 14 nights \u2014 save \u20B1' + ((BASE_RATE-getTier(14).rate)*14).toLocaleString('en-PH') + ' total';
+          else if (n >= 14 && n <= 27) nudge = 'Stay 28 nights \u2014 save \u20B1' + ((BASE_RATE-getTier(28).rate)*28).toLocaleString('en-PH') + ' total';
+          if (bdSavingLabel) { bdSavingLabel.textContent = nudge; bdSavingLabel.hidden = !nudge; }
+          bdSavingRow.hidden = false;
+        } else if (bdSavingRow) {
+          bdSavingRow.hidden = true;
+          if (bdSavingLabel) bdSavingLabel.hidden = true;
+        }
+
+        /* Zone B: OTA savings chip — anchoring vs. Airbnb service fees (~14-17%) */
+        var otaChip = document.getElementById('payOtaChip');
+        var otaText = document.getElementById('payOtaSavingText');
+        if (otaChip && otaText) {
+          var otaSaving = Math.round(total * 0.15);
+          otaText.textContent = 'Skip Airbnb\u2019s guest fee \u2014 you keep ~\u20B1' + otaSaving.toLocaleString('en-PH') + ' more by booking direct';
+          otaChip.hidden = false;
+        }
+
+        /* Zone B: Send Now */
+        var bdFee = document.getElementById('payBdFee');
+        if (bdFee) bdFee.textContent = dep.toLocaleString('en-PH');
+        var gcashHint = document.getElementById('gcashAmountHint');
+        if (gcashHint) gcashHint.textContent = '\u20B1' + dep.toLocaleString('en-PH');
+
+        /* Zone C */
+        var bdBalanceOnly = document.getElementById('payBdBalanceOnly');
+        if (bdBalanceOnly) bdBalanceOnly.textContent = '\u20B1' + balanceOnly.toLocaleString('en-PH');
 
         /* Update bank reference */
         var bankRef=document.getElementById('payBankRef');
@@ -4498,30 +5486,74 @@
           e.preventDefault();
           var amt=state.dep||'';
           var phone='09560115744';
-          /* gcash:// URI — opens app on Android/iOS if installed */
-          window.location.href='gcash://pay?phone='+phone+'&amount='+amt;
-          setTimeout(function(){
-            /* Web fallback for desktop or if app not installed */
-            window.open(
-              'https://m.gcash.com/send?mobile='+phone+'&amount='+amt,
-              '_blank','noopener'
-            );
+          var isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+          if (!isMobile) {
+            /* Desktop: skip deep link, go straight to web transfer instructions */
+            window.open('https://m.gcash.com/gcash-main/send?mobile='+phone+'&amount='+amt,'_blank','noopener');
+            return;
+          }
+
+          /* Mobile: attempt gcash:// URI; cancel web fallback if the OS
+             switches apps (page fires visibilitychange or blur).           */
+          var fallbackFired = false;
+          var appOpened = false;
+
+          function onVisibilityChange() {
+            if (document.hidden) { appOpened = true; }
+          }
+          function onBlur() { appOpened = true; }
+
+          document.addEventListener('visibilitychange', onVisibilityChange);
+          window.addEventListener('blur', onBlur);
+
+          window.location.href = 'gcash://pay?phone='+phone+'&amount='+amt;
+
+          var fallbackTimer = setTimeout(function(){
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            window.removeEventListener('blur', onBlur);
+            if (!appOpened && !fallbackFired) {
+              fallbackFired = true;
+              window.open('https://m.gcash.com/gcash-main/send?mobile='+phone+'&amount='+amt,'_blank','noopener');
+            }
           }, 1500);
+
+          /* Clean up listeners early if app was opened */
+          setTimeout(function(){
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            window.removeEventListener('blur', onBlur);
+            clearTimeout(fallbackTimer);
+          }, 3000);
         });
       }
 
       /* ─── Payment tabs ────────────────────────────────────────────── */
-      document.querySelectorAll('.pay-tab').forEach(function(tab){
-        tab.addEventListener('click', function(){
-          document.querySelectorAll('.pay-tab').forEach(function(t){
-            t.classList.remove('is-active'); t.setAttribute('aria-selected','false');
-          });
-          document.querySelectorAll('.pay-pane').forEach(function(p){ p.classList.remove('is-active'); });
-          this.classList.add('is-active'); this.setAttribute('aria-selected','true');
-          var pane=document.getElementById(this.getAttribute('aria-controls'));
-          if (pane) pane.classList.add('is-active');
+      function activateTab(tabId) {
+        document.querySelectorAll('.pay-tab').forEach(function(t){
+          t.classList.remove('is-active'); t.setAttribute('aria-selected','false');
         });
+        document.querySelectorAll('.pay-pane').forEach(function(p){ p.classList.remove('is-active'); });
+        var tab = document.getElementById(tabId);
+        if (tab) {
+          tab.classList.add('is-active'); tab.setAttribute('aria-selected','true');
+          var pane = document.getElementById(tab.getAttribute('aria-controls'));
+          if (pane) pane.classList.add('is-active');
+        }
+      }
+
+      document.querySelectorAll('.pay-tab').forEach(function(tab){
+        tab.addEventListener('click', function(){ activateTab(this.id); });
       });
+
+      /* Inline "switch to Bank Transfer" button inside GCash delay note */
+      var switchToBankBtn = document.getElementById('switchToBankBtn');
+      if (switchToBankBtn) {
+        switchToBankBtn.addEventListener('click', function(){
+          activateTab('tabBank');
+          var pane = document.getElementById('paneBank');
+          if (pane) pane.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
 
       /* ─── Receipt file handling ───────────────────────────────────── */
       function fmtSize(b){
@@ -4537,18 +5569,103 @@
           bookingError.hidden=false; return;
         }
         bookingError.hidden=true;
-        var reader=new FileReader();
-        reader.onload=function(ev){
-          var result=ev.target.result;
-          var comma=result.indexOf(',');
-          state.receiptB64  = result.slice(comma+1);
-          state.receiptMime = result.slice(5, result.indexOf(';'));
-          state.receiptName = file.name;
-          receiptPrevName.textContent=file.name;
-          receiptPrevSize.textContent=fmtSize(file.size);
-          receiptPreview.hidden=false;
-          receiptDropzone.classList.add('has-file');
+
+        /* Phase 1: Read file into base64 via FileReader.
+           Phase 2: Immediately POST the base64 as JSON to GAS uploadReceipt.
+           The form submission carries only the Drive URL + fileId returned —
+           no base64 ever touches the URL-encoded form body.                  */
+        state.receiptReading = true;
+        if (bookingSubmit) bookingSubmit.disabled = true;
+        if (receiptDropzone) receiptDropzone.setAttribute('data-reading', 'true');
+
+        var reader = new FileReader();
+
+        reader.onerror = function() {
+          state.receiptReading = false;
+          if (bookingSubmit && !bookingSubmit.dataset.submitted) bookingSubmit.disabled = false;
+          if (receiptDropzone) receiptDropzone.removeAttribute('data-reading');
+          bookingError.textContent = 'Could not read the file. Please try a different image.';
+          bookingError.hidden = false;
         };
+
+        reader.onload = function(ev) {
+          var dataUrl  = ev.target.result;
+          var comma    = dataUrl.indexOf(',');
+          var b64      = dataUrl.slice(comma + 1);
+          var mimeType = dataUrl.slice(5, dataUrl.indexOf(';'));
+          var filename = file.name;
+
+          /* Phase 2: upload to GAS via fetch JSON — reliable for any file size */
+          var endpoint = bookingForm.dataset.gasEndpoint;
+          if (!endpoint) {
+            /* No endpoint configured — fall back to storing b64 in state */
+            state.receiptB64     = b64;
+            state.receiptMime    = mimeType;
+            state.receiptName    = filename;
+            state.receiptUrl     = '';
+            state.receiptFileId  = '';
+            state.receiptReading = false;
+            if (bookingSubmit && !bookingSubmit.dataset.submitted) bookingSubmit.disabled = false;
+            if (receiptDropzone) receiptDropzone.removeAttribute('data-reading');
+            receiptPrevName.textContent = filename;
+            receiptPrevSize.textContent = fmtSize(file.size);
+            receiptPreview.hidden = false;
+            receiptDropzone.classList.add('has-file');
+            return;
+          }
+
+          fetch(endpoint, {
+            method:  'POST',
+            mode:    'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body:    JSON.stringify({
+              action:      'uploadReceipt',
+              b64:         b64,
+              filename:    filename,
+              mimeType:    mimeType,
+              guestName:   (document.getElementById('name')  || {}).value || '',
+              checkin:     state.checkin || '',
+              guestEmail:  (document.getElementById('email') || {}).value.trim() || ''
+            })
+          })
+          .then(function(resp) {
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            return resp.json();
+          })
+          .then(function(data) {
+            if (data.result !== 'success') throw new Error(data.message || 'Upload failed');
+            state.receiptUrl     = data.url    || '';
+            state.receiptFileId  = data.fileId || '';
+            state.receiptName    = filename;
+            state.receiptMime    = mimeType;
+            state.receiptB64     = null; /* not needed — already on Drive */
+            state.receiptReading = false;
+            if (bookingSubmit && !bookingSubmit.dataset.submitted) bookingSubmit.disabled = false;
+            if (receiptDropzone) receiptDropzone.removeAttribute('data-reading');
+            receiptPrevName.textContent = filename;
+            receiptPrevSize.textContent = fmtSize(file.size) + ' \u2714 Uploaded';
+            receiptPreview.hidden = false;
+            receiptDropzone.classList.add('has-file');
+          })
+          .catch(function(err) {
+            console.error('[receipt upload]', err);
+            /* Upload failed — still allow submission without receipt rather
+               than blocking the guest entirely. Show a warning.            */
+            state.receiptUrl     = '';
+            state.receiptFileId  = '';
+            state.receiptName    = '';
+            state.receiptMime    = '';
+            state.receiptB64     = null;
+            state.receiptReading = false;
+            if (bookingSubmit && !bookingSubmit.dataset.submitted) bookingSubmit.disabled = false;
+            if (receiptDropzone) receiptDropzone.removeAttribute('data-reading');
+            receiptDropzone.classList.remove('has-file');
+            receiptPreview.hidden = true;
+            bookingError.textContent = 'Screenshot upload failed — you can still submit and email us the receipt separately.';
+            bookingError.hidden = false;
+          });
+        };
+
         reader.readAsDataURL(file);
       }
 
@@ -4566,18 +5683,29 @@
       if (receiptRemove) {
         receiptRemove.addEventListener('click', function(){
           state.receiptB64=null; state.receiptName=null; state.receiptMime=null;
+          state.receiptUrl=''; state.receiptFileId=''; state.receiptReading=false;
           if (receiptFile) receiptFile.value='';
           receiptPreview.hidden=true;
           receiptDropzone.classList.remove('has-file');
+          receiptDropzone.removeAttribute('data-reading');
+          if (bookingSubmit && !bookingSubmit.dataset.submitted) bookingSubmit.disabled = false;
         });
       }
 
       /* ─── Field validation ────────────────────────────────────────── */
       var VALIDATORS = {
-        name:    function(v){ return v.trim().length>=2?null:'Please enter your full name'; },
-        contact: function(v){
-          v=v.trim(); if (!v) return 'Please enter your phone number or email';
-          return (/^[\d\s\+\-\(\)]{7,}$/.test(v)||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))?null:'Enter a valid phone number or email';
+        name:  function(v){ return v.trim().length>=2?null:'Please enter your full name'; },
+        phone: function(v){
+          v = v.trim();
+          if (!v) return 'Please enter your phone number';
+          /* strip spaces/dashes/parens then check min 6 digits */
+          return /^[\d]{6,}$/.test(v.replace(/[\s\-\(\)]/g,''))
+            ? null : 'Enter a valid phone number (digits only, e.g. 917 123 4567)';
+        },
+        email: function(v){
+          v = v.trim();
+          if (!v) return 'Please enter your email address';
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? null : 'Enter a valid email address';
         },
         guests: function(v){ return v?null:'Please select the number of guests'; }
       };
@@ -4596,12 +5724,102 @@
         var msg=fn(el.value); msg?showErr(el,msg):hideErr(el); return !msg;
       }
 
-      ['name','contact','guests'].forEach(function(id){
+      ['name','phone','email','guests'].forEach(function(id){
         var el=document.getElementById(id); if (!el) return;
         el.addEventListener('blur',   function(){ validateField(this); });
         el.addEventListener('input',  function(){ if (this.classList.contains('is-invalid')) validateField(this); });
         el.addEventListener('change', function(){ if (this.classList.contains('is-invalid')) validateField(this); });
       });
+
+      /* Phone wrapper invalid state — mirrors is-invalid on the compound input */
+      function syncPhoneWrapperState(isInvalid) {
+        var wrap = document.getElementById('phoneWrapper');
+        if (wrap) {
+          if (isInvalid) wrap.classList.add('is-invalid');
+          else wrap.classList.remove('is-invalid');
+        }
+      }
+      var phoneEl = document.getElementById('phone');
+      if (phoneEl) {
+        phoneEl.addEventListener('blur', function(){ syncPhoneWrapperState(this.classList.contains('is-invalid')); });
+        phoneEl.addEventListener('input', function(){ syncPhoneWrapperState(this.classList.contains('is-invalid')); });
+      }
+
+      /* ─── GAS POST via hidden form + iframe ──────────────────────────
+       *
+       * WHY fetch() FAILS HERE:
+       * GAS exec URL returns HTTP 302 → script.googleusercontent.com.
+       * That redirect response carries no CORS headers. The browser
+       * blocks it and throws NetworkError. mode:'no-cors' hits a
+       * spec-level network error on cross-origin redirects. XHR has
+       * the same problem. Nothing in fetch/XHR can cross this reliably.
+       *
+       * THE FIX — hidden <form> + hidden <iframe>:
+       * Form submissions are NOT subject to CORS. The POST body reaches
+       * GAS doPost() intact, including large receipt_b64 values.
+       * GAS executes, saves to Drive, writes the sheet, sends the email.
+       * The redirect lands in the hidden iframe — we can't read it
+       * (cross-origin) but the iframe 'load' event fires, confirming
+       * GAS finished. That event is our success signal.
+       * ──────────────────────────────────────────────────────────────── */
+      function submitToGAS(endpoint, payload, onSuccess, onError) {
+        var nonce   = '_gas_' + Date.now();
+        var TIMEOUT = 28000; /* 28 s — GAS cold-start can take ~10-15 s */
+
+        /* Hidden iframe — catches the GAS redirect response */
+        var ifr = document.createElement('iframe');
+        ifr.name = nonce;
+        ifr.setAttribute('aria-hidden', 'true');
+        ifr.style.cssText =
+          'position:fixed;top:-9999px;left:-9999px;' +
+          'width:1px;height:1px;opacity:0;border:none;pointer-events:none;';
+        document.body.appendChild(ifr);
+
+        /* Hidden form targeting the iframe */
+        var form = document.createElement('form');
+        form.method  = 'POST';
+        form.action  = endpoint;
+        form.target  = nonce;
+        form.enctype = 'application/x-www-form-urlencoded';
+        form.style.display = 'none';
+
+        Object.keys(payload).forEach(function(k) {
+          var inp  = document.createElement('input');
+          inp.type  = 'hidden';
+          inp.name  = k;
+          inp.value = (payload[k] == null) ? '' : String(payload[k]);
+          form.appendChild(inp);
+        });
+        document.body.appendChild(form);
+
+        var done  = false;
+        var timer = null;
+
+        function finish(ok, errObj) {
+          if (done) return;
+          done = true;
+          clearTimeout(timer);
+          setTimeout(function() {
+            if (form.parentNode) form.parentNode.removeChild(form);
+            if (ifr.parentNode)  ifr.parentNode.removeChild(ifr);
+          }, 800);
+          if (ok) onSuccess();
+          else    onError(errObj || new Error('Submission failed'));
+        }
+
+        /* Timeout — GAS almost certainly received and processed the POST by now.
+           Keep the button disabled and show success rather than a false error.
+           The guest will receive host confirmation; this is not a lost booking. */
+        timer = setTimeout(function() { finish(true); }, TIMEOUT);
+
+        /* load fires when the GAS redirect page finishes in the iframe */
+        ifr.addEventListener('load', function() { finish(true); });
+        ifr.addEventListener('error', function() {
+          finish(false, new Error('Network error — check your connection'));
+        });
+
+        form.submit();
+      }
 
       /* ─── Submit ──────────────────────────────────────────────────── */
       if (bookingSubmit) {
@@ -4611,10 +5829,21 @@
             showBanner('Our booking system is offline. Email cascadereservations@gmail.com to reserve.');
             return;
           }
-          var n=nights(state.checkin,state.checkout), total=n*RATE, dep=Math.ceil(total*0.5);
+          /* Safety net: if FileReader is still running, don't submit yet */
+          if (state.receiptReading) {
+            showBanner('Your screenshot is still being processed — please wait a moment and try again.');
+            return;
+          }
+          var n=nights(state.checkin,state.checkout), total=calcTotal(n), dep=Math.ceil(total*0.5);
+          var phoneCode  = (document.getElementById('phoneCode') || {}).value  || '+63';
+          var phoneNum   = (document.getElementById('phone')     || {}).value.trim() || '';
+          var guestEmail = (document.getElementById('email')     || {}).value.trim() || '';
+          var fullContact = phoneCode + ' ' + phoneNum + (guestEmail ? ' | ' + guestEmail : '');
           var payload={
             name:         document.getElementById('name').value.trim(),
-            contact:      document.getElementById('contact').value.trim(),
+            contact:      fullContact,   /* combined for sheet + legacy compat */
+            phone:        phoneCode + ' ' + phoneNum,
+            email:        guestEmail,
             checkin:      state.checkin,
             checkout:     state.checkout,
             guests:       document.getElementById('guests').value,
@@ -4624,29 +5853,31 @@
             message:      document.getElementById('message').value.trim(),
             timestamp:    new Date().toISOString(),
             source:       'direct',
-            receipt_b64:  state.receiptB64  || '',
-            receipt_name: state.receiptName || '',
-            receipt_mime: state.receiptMime || ''
+            receipt_url:      state.receiptUrl     || '',
+            receipt_file_id:  state.receiptFileId  || '',
+            receipt_name:     state.receiptName    || '',
+            receipt_mime:     state.receiptMime    || ''
           };
           setLoading(true);
           bookingError.hidden=true;
-          var params=new URLSearchParams();
-          Object.keys(payload).forEach(function(k){ params.append(k,String(payload[k])); });
-          fetch(endpoint,{ method:'POST', body:params })
-            .then(function(res){ if (!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
-            .then(function(data){
-              if (data&&data.result==='error') throw new Error(data.message||'Server error');
-              setLoading(false); openSuccess();
-            })
-            .catch(function(err){
-              console.error('[booking]',err);
-              showBanner('Something went wrong. Email cascadereservations@gmail.com and we\'ll sort it out.');
+
+          submitToGAS(
+            endpoint,
+            payload,
+            function()    { bookingSubmit.dataset.submitted='true'; setLoading(false); openSuccess(); },
+            function(err) {
+              console.error('[booking]', err);
+              showBanner('Something went wrong. Email cascadereservations@gmail.com and we\u2019ll sort it out.');
               setLoading(false);
-            });
+            }
+          );
         });
       }
 
       function setLoading(on){
+        /* After a successful submit, leave the button permanently disabled
+           so a second tap after the success dialog closes cannot re-submit. */
+        if (!on && bookingSubmit.dataset.submitted === 'true') return;
         bookingSubmit.disabled=on;
         bookingSubmit.textContent=on?'Sending\u2026':'Complete My Reservation';
       }
@@ -4703,6 +5934,15 @@
         if (!successOverlay) return;
         successOverlay.hidden=true;
         document.body.style.overflow='';
+        /* Progressive reveal: show stay-details section after dialog closes */
+        var stayDetails = document.getElementById('stayDetails');
+        if (stayDetails && stayDetails.hidden) {
+          stayDetails.hidden = false;
+          stayDetails.classList.add('is-revealed');
+          setTimeout(function () {
+            stayDetails.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 350);
+        }
       }
       if (successClose) successClose.addEventListener('click', closeSuccess);
       if (successDone)  successDone.addEventListener('click',  closeSuccess);
@@ -4727,6 +5967,7 @@
 
     /* ── Property gallery carousel — transform-based, smooth auto-advance ── */
     (function () {
+      'use strict';
       var carousel = document.querySelector('.gallery-carousel');
       var track    = document.getElementById('galleryTrack');
       var counter  = document.getElementById('galleryCounter');
@@ -4735,106 +5976,92 @@
       var btnNext  = document.getElementById('galleryNext');
       if (!track) return;
 
-      var TOTAL   = 13;
+      var TOTAL   = 20;
       var current = 0;
       var dots    = [];
       var autoTimer;
-      var AUTO_MS = 4500;   /* 4.5 s between slides */
+      var AUTO_MS = 4500;
 
-      /* Build diamond dot indicators */
       for (var i = 0; i < TOTAL; i++) {
         var d = document.createElement('div');
         d.className = 'gallery-dot' + (i === 0 ? ' is-active' : '');
-        dotsEl.appendChild(d);
+        if (dotsEl) dotsEl.appendChild(d);
         dots.push(d);
       }
 
-      /* Core: move to slide idx via CSS transform — no scroll at all */
-      function goTo(idx, instant) {
+      function goTo(idx) {
         current = ((idx % TOTAL) + TOTAL) % TOTAL;
-        if (instant) {
-          track.style.transition = 'none';
-        } else {
-          track.style.transition = 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)';
-        }
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        syncUI();
-      }
-
-      function syncUI() {
+        track.style.transition = 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)';
+        track.style.transform  = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === current); });
         if (counter) counter.textContent = (current + 1) + ' / ' + TOTAL;
-        dots.forEach(function (d, i) {
-          d.classList.toggle('is-active', i === current);
-        });
       }
 
-      /* Auto-advance */
       function startAuto() {
-        stopAuto();
+        clearInterval(autoTimer);
         autoTimer = setInterval(function () { goTo(current + 1); }, AUTO_MS);
       }
       function stopAuto() { clearInterval(autoTimer); }
 
-      /* Touch swipe support */
-      var touchStartX = 0;
-      var touchDeltaX = 0;
-      var isDragging  = false;
+      startAuto();
+
+      var touchStartX = 0, touchDeltaX = 0, isDragging = false;
 
       track.addEventListener('touchstart', function (e) {
+        isDragging = true;
         touchStartX = e.touches[0].clientX;
         touchDeltaX = 0;
-        isDragging  = true;
         stopAuto();
       }, { passive: true });
 
       track.addEventListener('touchmove', function (e) {
         if (!isDragging) return;
         touchDeltaX = e.touches[0].clientX - touchStartX;
-        /* Live drag feedback: shift current slide by delta */
-        var pct = (touchDeltaX / carousel.offsetWidth) * 100;
         track.style.transition = 'none';
-        track.style.transform  = 'translateX(calc(-' + (current * 100) + '% + ' + pct + 'px))';
+        track.style.transform  = 'translateX(calc(-' + (current * 100) + '% + ' + touchDeltaX + 'px))';
       }, { passive: true });
 
       track.addEventListener('touchend', function () {
         isDragging = false;
-        var threshold = carousel.offsetWidth * 0.22;   /* 22% of panel width */
-        if (touchDeltaX < -threshold) {
-          goTo(current + 1);
-        } else if (touchDeltaX > threshold) {
+        var threshold = carousel ? carousel.offsetWidth * 0.22 : 80;
+        if      (touchDeltaX < -threshold) { goTo(current + 1); }
+        else if (touchDeltaX >  threshold) { goTo(current - 1); }
+        else                               { goTo(current); }
+        setTimeout(startAuto, 80);
+      });
+
+      if (btnPrev) {
+        btnPrev.addEventListener('click', function () {
           goTo(current - 1);
-        } else {
-          goTo(current);   /* snap back */
-        }
-        setTimeout(startAuto, 1500);
-      }, { passive: true });
+          stopAuto();
+          setTimeout(startAuto, 3000);
+        });
+      }
 
-      /* Prev / Next buttons */
-      if (btnPrev) btnPrev.addEventListener('click', function () {
-        stopAuto(); goTo(current - 1); startAuto();
-      });
-      if (btnNext) btnNext.addEventListener('click', function () {
-        stopAuto(); goTo(current + 1); startAuto();
-      });
+      if (btnNext) {
+        btnNext.addEventListener('click', function () {
+          goTo(current + 1);
+          stopAuto();
+          setTimeout(startAuto, 3000);
+        });
+      }
 
-      /* Keyboard support */
-      document.addEventListener('keydown', function (e) {
-        if (!carousel || !document.body.contains(carousel)) return;
-        var r = carousel.getBoundingClientRect();
-        if (r.top > window.innerHeight || r.bottom < 0) return;
-        if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); startAuto(); }
-        if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); startAuto(); }
+      /* Pause autoplay when tab is hidden */
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { stopAuto(); }
+        else { startAuto(); }
       });
 
-      startAuto();
+      /* Reduced motion: kill autoplay, keep manual navigation */
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        stopAuto();
+      }
+
+      /* Init counter */
+      if (counter) counter.textContent = '1 / ' + TOTAL;
+
     }());
-
-
-    /* ── Footer year ── */
-    (function () {
-      var el = document.getElementById('footerYear');
-      if (el) el.textContent = new Date().getFullYear();
-    }());
-
   </script>
-</body></html>
+
+</body>
+</html>
