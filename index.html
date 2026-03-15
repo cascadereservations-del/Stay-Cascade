@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cascade Hideaway — Boutique short-term rental in General Santos City, Philippines. Hotel Comfort. Home Warmth. Book direct for the best rate.">
   <meta name="theme-color" content="#1C1006">
+  <meta property="og:title" content="Cascade Hideaway — Book Direct | General Santos City">
+  <meta property="og:description" content="Hotel Comfort. Home Warmth. Boutique short-term rental in General Santos City, Philippines. Book direct for the best rate — no platform fees.">
+  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1wzkooPfoOsa2GzWcixHuZ6xYBf54munt&sz=w1200">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
   <title>Cascade Hideaway — Book Direct | General Santos City</title>
 
@@ -448,8 +453,24 @@
 
     .hero-cta-note {
       font-size: var(--step--2); font-weight: 400;
-      letter-spacing: 0.08em; color: rgb(247 242 232 / 0.40);
+      letter-spacing: 0.08em; color: rgb(247 242 232 / 0.62);
     }
+
+    /* ── Trust strip below hero CTA ── */
+    .hero-trust-strip {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 0.45em 1.4em; margin-top: var(--space-l);
+      opacity: 0; transform: translateY(14px);
+      animation: heroRise 1.3s var(--ch-ease) 0.88s both;
+    }
+    .hero-trust-item {
+      display: flex; align-items: center; gap: 0.4em;
+      font-family: var(--ch-font-body); font-size: 0.58rem;
+      font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgb(247 242 232 / 0.42);
+    }
+    .hero-trust-item svg { width: 10px; height: 10px; color: var(--ch-gold); opacity: 0.7; flex-shrink: 0; }
+    .hero-trust-sep { display: block; width: 1px; height: 0.75em; background: rgb(247 242 232 / 0.15); }
 
     .hero-location {
       position: absolute; inset-block-end: var(--space-l);
@@ -519,6 +540,23 @@
       .ch-reveal { opacity: 1; transform: none; transition: none; }
     }
 
+    /* ── Mobile section padding — 9rem is too heavy on 375px ── */
+    @media (max-width: 639px) {
+      .about-section,
+      .amenities-section,
+      .rates-section,
+      .gallery-section,
+      .booking-section,
+      .contact-section { padding-block: var(--space-xl); }
+    }
+
+    /* ── Mobile gap clamp — single-col stacks get too much space at gap: 6rem ── */
+    @media (max-width: 767px) {
+      .about-inner,
+      .rates-inner,
+      .booking-inner { gap: var(--space-xl); }
+    }
+
     /* ── 11. SECTION CHROME ── */
     .section-label {
       display: flex; align-items: center; gap: 0.85em;
@@ -572,7 +610,7 @@
     }
 
     .about-text { color: var(--ch-cream); }
-    .about-text .section-heading { color: var(--ch-cream); margin-bottom: var(--space-l); }
+    .about-text .section-heading { color: var(--ch-cream); margin-bottom: var(--space-m); }
     .about-text .heading-em {
       display: block; font-style: italic; font-weight: 300;
       color: color-mix(in oklch, var(--ch-gold) 80%, var(--ch-cream));
@@ -652,7 +690,7 @@
       background-size: 160px 160px; opacity: 0.04;
     }
 
-    .amenities-header { text-align: center; margin-bottom: var(--space-2xl); }
+    .amenities-header { text-align: center; margin-bottom: var(--space-xl); }
     .amenities-header .section-label { justify-content: center; }
     .amenities-header .section-label::before {
       content: ''; flex: 0 0 auto;
@@ -710,7 +748,7 @@
     }
 
     .amenities-note {
-      margin-top: var(--space-2xl);
+      margin-top: var(--space-xl);
       padding: var(--space-l) var(--space-xl);
       background: var(--ch-cream);
       border-inline-start: 2px solid var(--ch-gold);
@@ -869,7 +907,7 @@
     }
 
     .rates-cta-row {
-      margin-top: var(--space-2xl); position: relative; z-index: 1;
+      margin-top: var(--space-xl); position: relative; z-index: 1;
       display: flex; flex-direction: column;
       align-items: center; gap: var(--space-s); text-align: center;
     }
@@ -890,7 +928,7 @@
       padding-block: var(--space-3xl); position: relative;
     }
 
-    .gallery-header { text-align: center; margin-bottom: var(--space-2xl); }
+    .gallery-header { text-align: center; margin-bottom: var(--space-xl); }
     .gallery-header .section-label { justify-content: center; }
     .gallery-header .section-label::before {
       content: ''; flex: 0 0 auto;
@@ -1348,7 +1386,7 @@
 
     .contact-inner { position: relative; z-index: 1; }
 
-    .contact-header { text-align: center; margin-bottom: var(--space-2xl); }
+    .contact-header { text-align: center; margin-bottom: var(--space-xl); }
     .contact-header .section-label { justify-content: center; }
     .contact-header .section-label::before {
       content: ''; flex: 0 0 auto;
@@ -1399,7 +1437,7 @@
 
     /* Host signature */
     .contact-signature {
-      margin-top: var(--space-2xl);
+      margin-top: var(--space-xl);
       padding-block-start: var(--space-l);
       border-block-start: 1px solid rgb(28 16 6 / 0.08);
       display: flex; align-items: center;
@@ -2101,50 +2139,101 @@
     .location-inner {
       display: grid;
       grid-template-columns: 1fr;
-      /* let photo height drive the row — no arbitrary min */
-      align-items: stretch;
+      min-height: 420px;
     }
     @media (min-width: 768px) {
-      .location-inner { grid-template-columns: 1fr 360px; }
+      .location-inner {
+        grid-template-columns: 1fr 360px;
+        min-height: 480px;
+      }
     }
     @media (min-width: 1024px) {
-      .location-inner { grid-template-columns: 1fr 400px; }
+      .location-inner {
+        grid-template-columns: 1fr 400px;
+        min-height: 520px;
+      }
     }
 
-    /* ── Explore panel — carousel only, zero padding so photo is flush ── */
+    /* ── Explore panel (concierge list — map hidden pre-booking) ── */
+    /* ══════════════════════════════════════════
+       EXPLORE PANEL — photo cards + quick grids
+    ══════════════════════════════════════════ */
     .location-explore {
-      background: var(--ch-mahogany);   /* mahogany behind carousel = no cream flash */
+      background: var(--ch-cream);
       padding: 0;
       display: flex; flex-direction: column;
+      gap: 0;
       position: relative;
       overflow: hidden;
     }
-    .location-explore::before { display: none; }   /* grain not needed — panel is flush photo */
+    @media (max-width: 767px) {
+      .location-explore { padding: 0; gap: 0; }
+    }
+    .location-explore::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.70' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23grain)' opacity='0.038'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
     .location-explore > * { position: relative; z-index: 1; }
+
+    /* Header */
+    .explore-eyebrow {
+      font-family: var(--ch-font-body);
+      font-size: var(--step--2); font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgb(201 150 58 / 0.65); margin-bottom: 0.55em;
+    }
+    .explore-heading {
+      font-family: var(--ch-font-display);
+      font-size: var(--step-2); font-weight: 300;
+      color: var(--ch-mahogany); line-height: 1.18; margin-bottom: 0.5em;
+    }
+    .explore-heading em {
+      font-style: italic;
+      color: color-mix(in oklch, var(--ch-gold) 80%, var(--ch-mahogany));
+    }
+    .explore-area {
+      font-family: var(--ch-font-body);
+      font-size: var(--step--1); font-weight: 400;
+      color: rgb(28 16 6 / 0.50); line-height: 1.55;
+    }
+    .explore-area-note {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--ch-gold); opacity: 0.80; margin-top: 0.4em;
+    }
 
     /* ── Property gallery carousel ── */
     .gallery-carousel {
       position: relative;
       overflow: hidden;
-      /* full-bleed — no parent padding to compensate for */
-      margin-inline: 0;
-      flex: 1;   /* fill any residual height in the grid cell */
+      flex: 1;           /* fill all available height in location-explore */
+      min-height: 280px;
+    }
+    @media (max-width: 767px) {
+      .gallery-carousel { min-height: 260px; }
     }
 
     .gallery-track {
       display: flex;
+      height: 100%;
       will-change: transform;
       transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .gallery-slide {
       flex: 0 0 100%;
+      scroll-snap-align: start;
       position: relative;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: unset;   /* fill container height instead of ratio */
+      height: 100%;
       background: var(--ch-mahogany);
       overflow: hidden;
     }
-    @media (max-width: 479px) { .gallery-slide { aspect-ratio: 4 / 3; } }
+    /* taller on mobile where panel is narrow */
+    @media (max-width: 479px) { .gallery-slide { aspect-ratio: unset; } }
 
     .gallery-slide img {
       width: 100%; height: 100%;
@@ -2152,18 +2241,21 @@
       filter: sepia(0.10) contrast(1.04);
       transition: opacity 400ms var(--ch-ease);
       user-select: none; pointer-events: none;
+      /* prevent layout shift while loading */
     }
     .gallery-slide img.loading { opacity: 0; }
 
-    /* Bottom gradient scrim */
+    /* Bottom scrim — text overlay readable */
     .gallery-slide::after {
       content: '';
-      position: absolute; inset: 50% 0 0 0;
-      background: linear-gradient(to bottom, transparent 0%, rgb(28 16 6 / 0.65) 100%);
+      position: absolute; inset: 55% 0 0 0;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(28 16 6 / 0.60) 100%);
       pointer-events: none;
     }
 
-    /* Caption overlay */
+    /* Caption + address note overlaid on photo */
     .gallery-caption {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 0.9em 1.1em 0.85em;
@@ -2194,7 +2286,7 @@
       color: rgb(201 150 58 / 0.65); margin-top: 0.3em;
     }
 
-    /* Slide counter */
+    /* Slide counter top-right */
     .gallery-counter {
       position: absolute; top: 0.85em; right: 1em;
       font-family: var(--ch-font-body);
@@ -2203,7 +2295,8 @@
       color: rgb(247 242 232 / 0.55);
       background: rgb(28 16 6 / 0.45);
       padding: 0.25em 0.65em;
-      z-index: 3; user-select: none;
+      z-index: 3;
+      user-select: none;
     }
 
     /* Prev / Next buttons */
@@ -2214,7 +2307,8 @@
       display: flex; align-items: center; justify-content: center;
       background: rgb(28 16 6 / 0.55);
       border: 1px solid rgb(247 242 232 / 0.15);
-      color: rgb(247 242 232 / 0.80); cursor: pointer;
+      color: rgb(247 242 232 / 0.80);
+      cursor: pointer;
       transition: background var(--ch-dur-s) var(--ch-ease),
                   border-color var(--ch-dur-s) var(--ch-ease),
                   color var(--ch-dur-s) var(--ch-ease);
@@ -2227,12 +2321,14 @@
     .gallery-btn svg { width: 14px; height: 14px; }
     .gallery-btn-prev { left: 0.75em; }
     .gallery-btn-next { right: 0.75em; }
+    /* Hide buttons on touch — swipe is primary */
     @media (hover: none) { .gallery-btn { display: none; } }
 
-    /* Diamond dot indicators */
+    /* Dot indicators */
     .gallery-dots {
       position: absolute; bottom: 0.6em; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 5px; z-index: 4; pointer-events: none;
+      display: flex; gap: 5px; z-index: 4;
+      pointer-events: none;
     }
     .gallery-dot {
       width: 4px; height: 4px;
@@ -2246,6 +2342,7 @@
       transform: rotate(45deg) scale(1.4);
     }
 
+    /* ── Section label shared by cards + quick grids ── */
     /* Contact sidebar panel */
     .location-contact {
       background: var(--ch-mahogany);
@@ -2407,6 +2504,67 @@
       letter-spacing: 0.03em; font-style: italic;
       margin-top: 0.4em;
     }
+    /* ── Mobile sticky CTA bar — appears after hero scroll ── */
+    .sticky-cta-bar {
+      position: fixed;
+      inset-block-end: 0; inset-inline: 0;
+      z-index: 800;
+      background: var(--ch-mahogany);
+      border-block-start: 1px solid rgb(201 150 58 / 0.20);
+      padding: var(--space-s) var(--ch-gutter);
+      display: flex; align-items: center; gap: var(--space-s);
+      transform: translateY(100%);
+      transition: transform var(--ch-dur-m) var(--ch-ease),
+                  box-shadow var(--ch-dur-m) var(--ch-ease);
+      box-shadow: none;
+    }
+    .sticky-cta-bar.is-visible {
+      transform: translateY(0);
+      box-shadow: 0 -4px 24px rgb(0 0 0 / 0.35);
+    }
+    .sticky-cta-bar.is-hidden { transform: translateY(100%); }
+    /* Only show on mobile/tablet — desktop header CTA is enough */
+    @media (min-width: 900px) { .sticky-cta-bar { display: none; } }
+
+    .sticky-cta-rate {
+      flex: 1; min-width: 0;
+      font-family: var(--ch-font-display); font-size: var(--step-1);
+      font-weight: 300; color: var(--ch-cream); white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .sticky-cta-rate small {
+      display: block; font-family: var(--ch-font-body);
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgb(247 242 232 / 0.40);
+      margin-bottom: 0.1em;
+    }
+    .sticky-cta-btn {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 0.4em;
+      padding: 0.75em 1.6em;
+      background: var(--ch-gold-gradient);
+      color: var(--ch-mahogany);
+      font-family: var(--ch-font-body);
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity var(--ch-dur-s) var(--ch-ease);
+    }
+    .sticky-cta-btn:hover { opacity: 0.88; }
+    .sticky-cta-btn:focus-visible { outline: 2px solid var(--ch-gold); outline-offset: 2px; }
+
+    /* Pad booking section so sticky bar doesn't overlap on mobile */
+    @media (max-width: 899px) {
+      .site-footer { padding-bottom: calc(var(--space-m) + 64px); }
+    }
+
+    /* ── WhatsApp CTA button ── */
+    .loc-cta-btn.is-whatsapp:hover {
+      border-color: rgb(37 211 102 / 0.30);
+      background: rgb(37 211 102 / 0.05);
+    }
+    .loc-cta-btn.is-whatsapp svg { color: #25D366; opacity: 0.85; }
+    .loc-cta-btn.is-whatsapp:hover svg { opacity: 1; }
   </style>
 </head>
 
@@ -2471,6 +2629,23 @@
         <span class="hero-cta-note">Best rate guaranteed</span>
       </div>
 
+      <div class="hero-trust-strip" aria-hidden="true">
+        <span class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          No platform fees
+        </span>
+        <span class="hero-trust-sep"></span>
+        <span class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Personal host
+        </span>
+        <span class="hero-trust-sep"></span>
+        <span class="hero-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Flexible payment
+        </span>
+      </div>
+
     </div>
 
     <p class="hero-location" aria-hidden="true">
@@ -2510,7 +2685,7 @@
           <span class="gold-rule-sm ch-reveal" style="margin-block: var(--space-m);" aria-hidden="true"></span>
 
           <p class="about-body is-lead ch-reveal">
-            Not a hotel. Not quite like home. Something better than both.
+            All the polish of a hotel. All the warmth of a home.
           </p>
 
           <p class="about-body ch-reveal">
@@ -3018,11 +3193,16 @@
             our team will reach out personally to confirm within two hours.
           </p>
 
+          <!-- Soft urgency signal — hospitality psychology -->
+          <p class="ch-reveal" style="font-family:var(--ch-font-body); font-size:var(--step--2); font-weight:500; letter-spacing:0.08em; color:rgb(201 150 58 / 0.65); margin-bottom:var(--space-s);">
+            <span aria-hidden="true">◆ </span>This property typically books 2–4 weeks in advance
+          </p>
+
           <ul class="booking-perks ch-reveal" aria-label="Booking highlights">
             <li class="booking-perk">Booking direct means the best rate — always, without exception</li>
-            <li class="booking-perk">Staying five nights or more? Just mention it in your message and we will prepare something special for you</li>
-            <li class="booking-perk">A reservation fee holds your dates — the remaining balance is due 24 hours before or upon check-in, whichever suits you</li>
-            <li class="booking-perk">We are here if you need us — your host Marifel responds, not just replies</li>
+            <li class="booking-perk">Staying five nights or more? Mention it in your message — we will arrange a personal rate</li>
+            <li class="booking-perk">50% reservation fee holds your dates — balance due 24 hours before or at check-in</li>
+            <li class="booking-perk">Your host Marifel responds personally, not through a chatbot</li>
           </ul>
 
         </div>
@@ -3122,7 +3302,6 @@
                   </select>
                   <span class="form-error-msg" id="guests-error" role="alert" hidden></span>
                 </div>
-                <div class="form-field" aria-hidden="true" style="visibility:hidden;"></div>
               </div>
 
               <div class="form-field">
@@ -3566,6 +3745,22 @@
         <!-- Direct contact CTAs -->
         <div class="loc-cta-group" aria-label="Reach us directly">
 
+          <!-- WhatsApp — dominant PH channel -->
+          <a class="loc-cta-btn is-whatsapp"
+             href="https://wa.me/639618056979?text=Hi%2C%20I%27d%20like%20to%20book%20Cascade%20Hideaway"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Send a WhatsApp message to Cascade Reservations">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.907-1.425A9.958 9.958 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 0 1-4.076-1.112l-.292-.173-3.012.875.857-3.024-.191-.31A7.958 7.958 0 0 1 4 12a8 8 0 1 1 16 0 8 8 0 0 1-8 8z"/>
+            </svg>
+            <span class="loc-cta-label">
+              <strong>WhatsApp Us</strong>
+              <span>Ms. Jary · quick replies</span>
+            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:0.3; width:11px; height:11px; flex-shrink:0;"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+
           <!-- Facebook Messenger -->
           <a class="loc-cta-btn is-messenger"
              href="https://m.me/CascadeReservations"
@@ -3582,10 +3777,7 @@
           </a>
 
           <!-- Email with pre-filled subject -->
-          <a class="loc-cta-btn"
-             id="contactEmailBtn"
-             href="mailto:cascadereservations@gmail.com?subject=Booking%20Enquiry%20%E2%80%94%20Cascade%20Hideaway&body=Hello%20Marifel%2C%0A%0AI%20would%20like%20to%20enquire%20about%20a%20stay%20at%20Cascade%20Hideaway.%0A%0AName%3A%20%0ACheck-in%20Date%3A%20%0ACheck-out%20Date%3A%20%0ANumber%20of%20Guests%3A%20%0AMessage%3A%20%0A%0AThank%20you!"
-             aria-label="Send an email to Cascade Reservations">
+          <a class="loc-cta-btn" id="contactEmailBtn" href="mailto:cascadereservations@gmail.com?subject=Booking%20Enquiry%20—%20Cascade%20Hideaway" aria-label="Send an email to Cascade Reservations">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <span class="loc-cta-label">
               <strong>Email Us</strong>
@@ -3600,6 +3792,17 @@
 
     </div>
   </section>
+
+  <!-- ============================================================
+       MOBILE STICKY CTA BAR — appears after hero exits viewport
+  ============================================================ -->
+  <div class="sticky-cta-bar" id="stickyCta" aria-hidden="true">
+    <div class="sticky-cta-rate">
+      <small>From</small>
+      ₱1,780 / night
+    </div>
+    <a href="#booking" class="sticky-cta-btn" tabindex="-1">Book Direct</a>
+  </div>
 
   <!-- ============================================================
        FOOTER
@@ -3654,6 +3857,8 @@
         <br><br>
         Need to reach us? Email
         <a href="mailto:cascadereservations@gmail.com">cascadereservations@gmail.com</a>
+        or
+        <a href="https://wa.me/639618056979" target="_blank" rel="noopener noreferrer" style="color:var(--ch-gold);">WhatsApp us</a>
         and we will respond right away.
       </p>
 
@@ -3694,6 +3899,39 @@
        SCRIPTS
   ============================================================ -->
   <script>
+    /* ── Sticky mobile CTA bar ── */
+    (function () {
+      'use strict';
+      var bar     = document.getElementById('stickyCta');
+      var barBtn  = bar ? bar.querySelector('.sticky-cta-btn') : null;
+      var hero    = document.getElementById('hero');
+      var booking = document.getElementById('booking');
+      if (!bar || !hero) return;
+
+      var visible = false;
+
+      function update() {
+        var heroBottom    = hero.getBoundingClientRect().bottom;
+        var bookingTop    = booking ? booking.getBoundingClientRect().top : Infinity;
+        var bookingBottom = booking ? booking.getBoundingClientRect().bottom : Infinity;
+        var inBooking     = bookingTop < window.innerHeight * 0.5 && bookingBottom > 0;
+        var shouldShow    = heroBottom < 0 && !inBooking;
+        if (shouldShow === visible) return;
+        visible = shouldShow;
+        bar.classList.toggle('is-visible', shouldShow);
+        /* Make tab-reachable only when shown */
+        if (barBtn) barBtn.tabIndex = shouldShow ? 0 : -1;
+        bar.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) { requestAnimationFrame(function () { update(); ticking = false; }); ticking = true; }
+      }, { passive: true });
+      update();
+    }());
+
+
     /* ── Sticky header shrink on scroll ── */
     (function () {
       'use strict';
@@ -3772,7 +4010,7 @@
             }
           });
         },
-        { rootMargin: '0px 0px -56px 0px', threshold: 0.08 }
+        { rootMargin: '0px 0px -40px 0px', threshold: 0.06 }
       );
       document.querySelectorAll('.ch-reveal').forEach(function (el) {
         observer.observe(el);
@@ -4579,28 +4817,24 @@
         stopAuto(); goTo(current + 1); startAuto();
       });
 
-      /* Pause on hover */
-      carousel.addEventListener('mouseenter', stopAuto);
-      carousel.addEventListener('mouseleave', startAuto);
-
-      /* Keyboard — arrow keys when carousel is focused */
-      track.setAttribute('tabindex', '0');
-      track.addEventListener('keydown', function (e) {
+      /* Keyboard support */
+      document.addEventListener('keydown', function (e) {
+        if (!carousel || !document.body.contains(carousel)) return;
+        var r = carousel.getBoundingClientRect();
+        if (r.top > window.innerHeight || r.bottom < 0) return;
         if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); startAuto(); }
         if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); startAuto(); }
       });
 
-      /* Init */
-      goTo(0, true);
       startAuto();
     }());
+
 
     /* ── Footer year ── */
     (function () {
       var el = document.getElementById('footerYear');
       if (el) el.textContent = new Date().getFullYear();
     }());
-  </script>
 
-</body>
-</html>
+  </script>
+</body></html>
