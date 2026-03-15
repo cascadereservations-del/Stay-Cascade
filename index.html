@@ -2101,97 +2101,49 @@
     .location-inner {
       display: grid;
       grid-template-columns: 1fr;
-      min-height: 220px;
+      /* let photo height drive the row — no arbitrary min */
+      align-items: stretch;
     }
     @media (min-width: 768px) {
-      .location-inner {
-        grid-template-columns: 1fr 360px;
-      }
+      .location-inner { grid-template-columns: 1fr 360px; }
     }
     @media (min-width: 1024px) {
-      .location-inner {
-        grid-template-columns: 1fr 400px;
-      }
+      .location-inner { grid-template-columns: 1fr 400px; }
     }
 
-    /* ── Explore panel (concierge list — map hidden pre-booking) ── */
-    /* ══════════════════════════════════════════
-       EXPLORE PANEL — photo cards + quick grids
-    ══════════════════════════════════════════ */
+    /* ── Explore panel — carousel only, zero padding so photo is flush ── */
     .location-explore {
-      background: var(--ch-cream);
-      padding: var(--space-xl) var(--space-l) var(--space-l);
+      background: var(--ch-mahogany);   /* mahogany behind carousel = no cream flash */
+      padding: 0;
       display: flex; flex-direction: column;
-      gap: var(--space-l);
       position: relative;
-      overflow: hidden;         /* contain grain + card overflow */
+      overflow: hidden;
     }
-    @media (max-width: 767px) {
-      .location-explore { padding: var(--space-l) var(--space-m); gap: var(--space-m); }
-    }
-    .location-explore::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.70' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23grain)' opacity='0.038'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
-    }
+    .location-explore::before { display: none; }   /* grain not needed — panel is flush photo */
     .location-explore > * { position: relative; z-index: 1; }
-
-    /* Header */
-    .explore-eyebrow {
-      font-family: var(--ch-font-body);
-      font-size: var(--step--2); font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgb(201 150 58 / 0.65); margin-bottom: 0.55em;
-    }
-    .explore-heading {
-      font-family: var(--ch-font-display);
-      font-size: var(--step-2); font-weight: 300;
-      color: var(--ch-mahogany); line-height: 1.18; margin-bottom: 0.5em;
-    }
-    .explore-heading em {
-      font-style: italic;
-      color: color-mix(in oklch, var(--ch-gold) 80%, var(--ch-mahogany));
-    }
-    .explore-area {
-      font-family: var(--ch-font-body);
-      font-size: var(--step--1); font-weight: 400;
-      color: rgb(28 16 6 / 0.50); line-height: 1.55;
-    }
-    .explore-area-note {
-      display: inline-block;
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.13em; text-transform: uppercase;
-      color: var(--ch-gold); opacity: 0.80; margin-top: 0.4em;
-    }
 
     /* ── Property gallery carousel ── */
     .gallery-carousel {
       position: relative;
       overflow: hidden;
-      /* bleed to panel edges */
-      margin-inline: calc(-1 * var(--space-l));
-    }
-    @media (max-width: 767px) {
-      .gallery-carousel { margin-inline: calc(-1 * var(--space-m)); }
+      /* full-bleed — no parent padding to compensate for */
+      margin-inline: 0;
+      flex: 1;   /* fill any residual height in the grid cell */
     }
 
     .gallery-track {
       display: flex;
-      /* transform-based: no scroll, no snap — JS drives translateX */
       will-change: transform;
       transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .gallery-slide {
       flex: 0 0 100%;
-      scroll-snap-align: start;
       position: relative;
       aspect-ratio: 16 / 9;
       background: var(--ch-mahogany);
       overflow: hidden;
     }
-    /* taller on mobile where panel is narrow */
     @media (max-width: 479px) { .gallery-slide { aspect-ratio: 4 / 3; } }
 
     .gallery-slide img {
@@ -2200,21 +2152,18 @@
       filter: sepia(0.10) contrast(1.04);
       transition: opacity 400ms var(--ch-ease);
       user-select: none; pointer-events: none;
-      /* prevent layout shift while loading */
     }
     .gallery-slide img.loading { opacity: 0; }
 
-    /* Bottom scrim — text overlay readable */
+    /* Bottom gradient scrim */
     .gallery-slide::after {
       content: '';
-      position: absolute; inset: 55% 0 0 0;
-      background: linear-gradient(to bottom,
-        transparent 0%,
-        rgb(28 16 6 / 0.60) 100%);
+      position: absolute; inset: 50% 0 0 0;
+      background: linear-gradient(to bottom, transparent 0%, rgb(28 16 6 / 0.65) 100%);
       pointer-events: none;
     }
 
-    /* Caption + address note overlaid on photo */
+    /* Caption overlay */
     .gallery-caption {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 0.9em 1.1em 0.85em;
@@ -2245,7 +2194,7 @@
       color: rgb(201 150 58 / 0.65); margin-top: 0.3em;
     }
 
-    /* Slide counter top-right */
+    /* Slide counter */
     .gallery-counter {
       position: absolute; top: 0.85em; right: 1em;
       font-family: var(--ch-font-body);
@@ -2254,8 +2203,7 @@
       color: rgb(247 242 232 / 0.55);
       background: rgb(28 16 6 / 0.45);
       padding: 0.25em 0.65em;
-      z-index: 3;
-      user-select: none;
+      z-index: 3; user-select: none;
     }
 
     /* Prev / Next buttons */
@@ -2266,8 +2214,7 @@
       display: flex; align-items: center; justify-content: center;
       background: rgb(28 16 6 / 0.55);
       border: 1px solid rgb(247 242 232 / 0.15);
-      color: rgb(247 242 232 / 0.80);
-      cursor: pointer;
+      color: rgb(247 242 232 / 0.80); cursor: pointer;
       transition: background var(--ch-dur-s) var(--ch-ease),
                   border-color var(--ch-dur-s) var(--ch-ease),
                   color var(--ch-dur-s) var(--ch-ease);
@@ -2280,14 +2227,12 @@
     .gallery-btn svg { width: 14px; height: 14px; }
     .gallery-btn-prev { left: 0.75em; }
     .gallery-btn-next { right: 0.75em; }
-    /* Hide buttons on touch — swipe is primary */
     @media (hover: none) { .gallery-btn { display: none; } }
 
-    /* Dot indicators */
+    /* Diamond dot indicators */
     .gallery-dots {
       position: absolute; bottom: 0.6em; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 5px; z-index: 4;
-      pointer-events: none;
+      display: flex; gap: 5px; z-index: 4; pointer-events: none;
     }
     .gallery-dot {
       width: 4px; height: 4px;
@@ -2301,7 +2246,6 @@
       transform: rotate(45deg) scale(1.4);
     }
 
-    /* ── Section label shared by cards + quick grids ── */
     /* Contact sidebar panel */
     .location-contact {
       background: var(--ch-mahogany);
